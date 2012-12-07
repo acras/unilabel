@@ -2,7 +2,8 @@ program ppla;
 
 uses
   Forms,
-  MainFormUn in 'MainFormUn.pas' {Form1};
+  MainFormUn in 'MainFormUn.pas' {Form1},
+  acStrUtils in '..\..\..\repositorio\acStrUtils.pas';
 
 {$R *.res}
 

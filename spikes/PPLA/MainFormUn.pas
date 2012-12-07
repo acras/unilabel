@@ -9,18 +9,22 @@ uses
 type
   TForm1 = class(TForm)
     Button1: TButton;
+    Button2: TButton;
+    Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
-    function inicializaImpressora: boolean;
-    { Private declarations }
+    function inicializaImpressora(verbose: boolean = false): boolean;
   public
-    { Public declarations }
   end;
 
 var
   Form1: TForm1;
 
 implementation
+
+uses acStrUtils;
 
 {$R *.dfm}
 
@@ -150,7 +154,7 @@ implementation
               dwTimeoutms:integer):integer;stdcall;external 'WINPPLA.DLL';
 
 
-function TForm1.inicializaImpressora: boolean;
+function TForm1.inicializaImpressora(verbose: boolean = false): boolean;
 var
   nLen, len1, len2: integer;
   strmsg: string;
@@ -207,6 +211,8 @@ begin
       strmsg := strmsg + ' file succeed!';
   end;
   result := ret <= 0;
+  if verbose and not result then
+    MessageDlg('Impressora n緌 localizada.', mtError, [mbOK], 0);
 end;
 
 
@@ -215,53 +221,62 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   buff1 : array[0..127] of WideChar;
   himage : HBITMAP;
+  i: integer;
+  linha, nome, rua, numero, compl, cidade, bairro, cep: string;
 begin
-  if not inicializaImpressora then exit;
-     // sample setting.
-     A_Set_DebugDialog(1);
-     A_Set_Unit('n');
-     A_Set_Syssetting(1, 0, 0, 0, 0);
-     A_Set_Darkness(10);
-     A_Del_Graphic(1, '*');   // delete all picture.
-     A_Clear_Memory();   // clear memory.
-     A_WriteData(0, sznop2, StrLen(PAnsiChar(sznop2)));
-     A_WriteData(1, sznop1, StrLen(PAnsiChar(sznop1)));
+  if not inicializaImpressora(true) then exit;
 
-     // draw box.
-     A_Draw_Box('A', 10, 10, 380, 280, 4, 4);
-     A_Draw_Line('A', 200, 10, 4, 280);
+  A_Set_DebugDialog(1);
+  A_Set_Unit('m');
+  A_Set_Syssetting(1, 0, 0, 0, 0);
+  A_Del_Graphic(1, '*');
+  A_Clear_Memory();
 
-     // print text, true type text.
-     A_Prn_Text(20, 30, 1, 2, 0, 1, 1, 'N', 2, 'PPLA Lib Example');
-     A_Prn_Text_TrueType(20, 60, 30, 'Arial', 1, 400, 0, 0, 0, 'AA', 'TrueType Font', 1);   // save in ram.
-     A_Prn_Text_TrueType_W(20, 90, 20, 20, 'Times New Roman', 1, 400, 0, 0, 0, 'AB', 'TT_W: 多字元測試', 1);
+  for i := 0 to Memo1.Lines.Count-1 do
+  begin
+    linha := Memo1.Lines[i];
+    nome := getStrField2(linha, ';', 2);
+    rua := getStrField2(linha, ';', 3);
+    numero := getStrField2(linha, ';', 4);
+    compl := getStrField2(linha, ';', 5);
+    rua := rua + ', ' + numero;
+    bairro := getStrField2(linha, ';', 6);
+    cep := 'CEP: ' + getStrField2(linha, ';', 7);
+    cidade := getStrField2(linha, ';', 8);
+    bairro := bairro + ' - ' + cidade + ' - PR';
 
-     StringToWideChar('TT_Uni: 多字元測試', buff1, 128);  // Converts double-byte characters to UNICODE(wide characters).
-     buff1[13] := #$0000;   // null.
-     A_Prn_Text_TrueType_Uni(20, 120, 30, 'Times New Roman', 1, 400, 0, 0, 0, 'AC', buff1, 1, 1);   // UTF-16
+//    A_Prn_Text_TrueType(25, 190, 25, 'Verdana', 1, 400, 0, 0, 0, 'AZ', 'REMETENTE:', 1);
+    A_Prn_Text_TrueType(25, 190, 25, 'Verdana', 1, 400, 0, 0, 0, 'AA', nome, 1);
+    A_Prn_Text_TrueType(25, 150, 25, 'Verdana', 1, 400, 0, 0, 0, 'AB', rua, 1);
+    if compl <> '' then
+      A_Prn_Text_TrueType(25, 110, 25, 'Verdana', 1, 400, 0, 0, 0, 'AC', compl, 1);
+    A_Prn_Text_TrueType(25, 70, 25, 'Verdana', 1, 400, 0, 0, 0, 'AD', bairro, 1);
+    A_Prn_Text_TrueType(400, 2, 25, 'Verdana', 1, 400, 0, 0, 0, 'AE', cep, 1);
 
-     buff1[0] := #$FEFF;   // UTF-16.
-     StringToWideChar('TT_UniB: 多字元測試', buff1+1, 128);  // Converts double-byte characters to UNICODE(wide characters).
-     buff1[15] := #$0000;   // null.
-     A_Prn_Text_TrueType_UniB(20, 150, 30, 'Times New Roman', 1, 400, 0, 0, 0, 'AD', buff1, 0, 1);   // Byte Order Mark.
+    A_Print_Out(1, 1, 1, 1);
+  end;
+{  A_Prn_Barcode(2, 250, 1, 'e', 2, 5, 60, 'B', 1, 'OL0127');
+  A_Prn_Barcode(2, 80, 1, 'e', 2, 5, 60, 'B', 1, 'OL0127');
 
-     // barcode.
-     A_Prn_Barcode(220, 60, 1, 'A', 0, 0, 20, 'B', 1, '1234');
-     A_Bar2d_QR_A(220, 100, 1, '3', 10, 'N', 0, 'QR CODE');
+  A_Get_Graphic_ColorBMP(170, 530, 1, 'B', 'bb.bmp');
+  himage := LoadImage(0,'bb.bmp',IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+  If 0 <> himage then
+    DeleteObject(himage);}
 
-     // picture.
-     A_Get_Graphic_ColorBMP(220, 150, 1, 'B', 'bb.bmp');   // Color bmp file to ram.
-//     A_Get_Graphic_ColorBMPEx(220, 170, 200, 150, 2, 1, 'B', 'bb1', 'bb.bmp');//180 angle.
-//     himage := LoadImage(0,'bb.bmp',IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
-//     A_Get_Graphic_ColorBMP_HBitmap(300, 150, 250, 80, 1, 1, 'B', 'bb2', himage);//90 angle.
-     If 0 <> himage then
-         DeleteObject(himage);
 
-     // output.
-     A_Print_Out(1, 1, 1, 1);   // copy 2.
+  A_ClosePrn();
+end;
 
-     // close port.
-     A_ClosePrn();
+procedure TForm1.FormShow(Sender: TObject);
+begin
+  //button1.click;
+  //close;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  inicializaImpressora(true);
+  A_ClosePrn();
 end;
 
 end.
