@@ -30,6 +30,7 @@ object Form1: TForm1
     Lines.Strings = (
       '<xml>'
       #9'<configuration>'
+      #9'  <columns>3</columns>'
       #9'  <label-dimension>'
       #9'    <height>60</height> '
       #9'    <width>35</width>'
@@ -41,8 +42,17 @@ object Form1: TForm1
       #9'  </margin>'
       #9'</configuration>'
       #9'<labels>'
+      #9'  <label copies="7">'
+      #9'    <elements>'
+      #9'      <element type='#39'text'#39' value='#39'Le Lis Blanc'#39'>'
+      #9'        <position x='#39'10'#39' y='#39'20'#39' />'
+      
+        #9'        <font name='#39'Verdana'#39' size='#39'23'#39' bold='#39'true'#39' italic='#39'true' +
+        #39' />'
+      #9'      </element>'
+      #9'    </elements>'
+      #9'  </label>'
       #9'  <label>'
-      #9'    <count>7</count>'
       #9'    <elements>'
       #9'      <element type='#39'text'#39' value='#39'Le Lis Blanc'#39'>'
       #9'        <position x='#39'10'#39' y='#39'20'#39' />'

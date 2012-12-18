@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2012/12/18 17:33:58.628,=P:\unilabel\test\TestUnilabelXMLEngineUnit.pas</Transaction>
+    <Transaction>2012/12/18 17:33:59.009,=P:\unilabel\lib\UnilabelXMLEngineUnit.pas</Transaction>
+    <Transaction>2012/12/18 17:36:00.157,=P:\unilabel\lib\UnilabelInterfaceUnit.pas</Transaction>
+  </Transactions>
+</BorlandProject>
