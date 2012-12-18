@@ -253,6 +253,7 @@ begin
     A_Prn_Text_TrueType(25, 70, 25, 'Verdana', 1, 400, 0, 0, 0, 'AD', bairro, 1);
     A_Prn_Text_TrueType(400, 2, 25, 'Verdana', 1, 400, 0, 0, 0, 'AE', cep, 1);
 
+    A_Print_Out(1, 1, 1, 1);
   end;}
   A_Prn_Barcode(2, 250, 1, 'e', 2, 5, 60, 'B', 1, 'OL0127');
   A_Prn_Barcode(2, 80, 1, 'e', 2, 5, 60, 'B', 1, 'OL0127');
@@ -261,7 +262,8 @@ begin
   himage := LoadImage(0,'bb.bmp',IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   If 0 <> himage then
     DeleteObject(himage);
-  A_Print_Out(1, 1, 1, 1);
+
+
   A_ClosePrn();
 end;
 

@@ -261,7 +261,9 @@ begin
   himage := LoadImage(0,'bb.bmp',IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   If 0 <> himage then
     DeleteObject(himage);
-  A_Print_Out(1, 1, 1, 1);
+    A_Print_Out(1, 1, 1, 1);
+
+
   A_ClosePrn();
 end;
 
