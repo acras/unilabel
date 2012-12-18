@@ -16,11 +16,12 @@ type
     procedure printBarcode(data: string; x,y: Integer;
       barcodeType: TUnilabelBarcodeFormats;
       height, narrowWidth, wideWidth: Integer;
-      showNumeric: boolean);
+      showReadable: boolean);
     procedure printOrientedBarcode(data: string; x,y: Integer; orientation: Integer;
       barcodeType: TUnilabelBarcodeFormats;
       height, narrowWidth, wideWidth: Integer;
-      showNumeric: boolean);
+      showReadable: boolean);
+    procedure printImage(path: string; x,y: Integer);
 
     //Flow Control
     function initializePrinter: boolean;

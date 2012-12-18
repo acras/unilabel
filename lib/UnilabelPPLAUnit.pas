@@ -2,7 +2,7 @@ unit UnilabelPPLAUnit;
 
 interface
 
-uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils;
+uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils, Windows;
 
 type
 
@@ -17,17 +17,19 @@ type
       fontSize: Integer);
     procedure printBarcode(data: string; x: Integer; y: Integer;
       barcodeType: TUnilabelBarcodeFormats; height: Integer;
-      narrowWidth: Integer; wideWidth: Integer; showNumeric: Boolean);
+      narrowWidth: Integer; wideWidth: Integer; showReadable: Boolean);
     procedure printOrientedBarcode(data: string; x: Integer; y: Integer;
       orientation: Integer; barcodeType: TUnilabelBarcodeFormats;
       height: Integer; narrowWidth: Integer; wideWidth: Integer;
-      showNumeric: Boolean);
+      showReadable: Boolean);
+    procedure printImage(path: string; x,y: Integer);
     function initializePrinter: boolean;
     procedure printOut;
     procedure closePrinter;
   protected
     var currentInternalVarIndex: integer;
     function nextInternalVarName: string;
+    procedure validateBarcodeParameters(narrowWidth, wideWidth: integer);
   end;
 
 implementation
@@ -105,14 +107,34 @@ end;
 
 procedure TUnilabelPPLA.printBarcode(data: string; x, y: Integer;
   barcodeType: TUnilabelBarcodeFormats; height, narrowWidth, wideWidth: Integer;
-  showNumeric: Boolean);
+  showReadable: Boolean);
+var
+  pType: char;
 begin
+  validateBarcodeParameters(narrowWidth, wideWidth);
+  pType := 'a';
+  if barcodeType = bcfCode128 then
+    pType := 'e';
+  if showReadable then
+    pType := UpCase(pType);
 
+  A_Prn_Barcode(x, y, 1, pType, narrowWidth, wideWidth, height, 'N', 0,
+    ansiString(data));
+end;
+
+procedure TUnilabelPPLA.printImage(path: string; x, y: Integer);
+var
+  himage : HBITMAP;
+begin
+  A_Get_Graphic_ColorBMP(x, y, 1, 'B', path);
+  himage := LoadImage(0,PChar(path),IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+  If 0 <> himage then
+    DeleteObject(himage);
 end;
 
 procedure TUnilabelPPLA.printOrientedBarcode(data: string; x, y, orientation: Integer;
   barcodeType: TUnilabelBarcodeFormats; height, narrowWidth, wideWidth: Integer;
-  showNumeric: Boolean);
+  showReadable: Boolean);
 begin
 
 end;
@@ -137,7 +159,18 @@ begin
   if fsUnderline in fontStyles then iUnderline := 1 else iUnderline := 0;
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;
   A_Prn_Text_TrueType(x, y, fontSize, AnsiString(fontName), 1, iBold,
-    iItalic, iUnderline, iStrikeOut, nextInternalVarName, Ansistring(data), 1);
+    iItalic, iUnderline, iStrikeOut, ansiString(nextInternalVarName),
+    Ansistring(data), 1);
+
+end;
+
+procedure TUnilabelPPLA.validateBarcodeParameters(narrowWidth,
+  wideWidth: integer);
+begin
+  if (narrowWidth > 24) or (narrowWidth < 0) then
+    raise Exception.Create('Invalid narrow width value. Must be between 0 and 24');
+  if (wideWidth > 24) or (wideWidth < 0) then
+    raise Exception.Create('Invalid narrow width value. Must be between 0 and 24');
 
 end;
 

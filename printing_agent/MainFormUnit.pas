@@ -9,6 +9,7 @@ uses
 type
   TForm1 = class(TForm)
     Button1: TButton;
+    Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -23,18 +24,16 @@ implementation
 
 {$R *.dfm}
 
-uses UnilabelPPLAUnit;
+uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
   ppla: TUnilabelPPLA;
+  engine: TUnilabelXMLEngine;
 begin
   ppla := TUnilabelPPLA.create;
-  ppla.initializePrinter;
-  ppla.printText('Ricardo Acras', 10, 10, 'Verdana', [fsBold], 40);
-  ppla.printText('Ricardo Acras', 10, 50, 'Verdana', [fsItalic], 40);
-  ppla.printText('Ricardo Acras', 10, 90, 'Verdana', [fsStrikeOut], 40);
-  ppla.printOut;
+  engine := TUnilabelXMLEngine.Create(ppla);
+  engine.print(Memo1.Lines.GetText);
 end;
 
 end.
