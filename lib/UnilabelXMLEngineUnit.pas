@@ -2,8 +2,8 @@ unit UnilabelXMLEngineUnit;
 
 interface
 
-uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Vcl.Dialogs, MSXML2_TLB,
-  ComObj, System.SysUtils;
+uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs, MSXML2_TLB,
+  ComObj, System.SysUtils, Vcl.Graphics;
 
 type
 
@@ -29,10 +29,14 @@ private
   function parseIntegerProperty(xml: IXMLDomDocument2;
     path: string; defaultValue: integer = 1): integer;
   procedure printLabels(xml: IXMLDomDocument2);
-    function getCopiesFromLabelNode(node: IXMLDomNode): integer;
-    procedure generateColumn(node: IXMLDomNode); overload;
-    procedure generateColumn(node: IXMLDomNode; n: integer); overload;
-    procedure printOutLine(n: integer);
+  function getCopiesFromLabelNode(node: IXMLDomNode): integer;
+  procedure generateColumn(node: IXMLDomNode); overload;
+  procedure generateColumns(node: IXMLDomNode; n: integer = 1); overload;
+  procedure printOutLine(n: integer);
+  procedure addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
+  procedure addParsedBarcodeElement(p: IUnilabel; n: IXMLDOMNode);
+    function getXOffset: integer;
+  property xOffset: integer read getXOffset;
 end;
 
 implementation
@@ -66,6 +70,16 @@ var
   nodes: IXMLDOMNodeList;
   i, n: integer;
 begin
+  printingObject.printText('Estopim - Blusa',2,30,'Verdana',[],28);
+  printingObject.printText('09542',2,27,'Verdana',[],28);
+  printingObject.printBarcode('09542',2,21,bcfCode128,6,2,6,false);
+  //tag
+  printingObject.printText('Estopim - Blusa',2,15,'Verdana',[],28);
+  printingObject.printText('09542',2,12,'Verdana',[],28);
+  printingObject.printBarcode('09542',2,6,bcfCode128,6,2,6,false);
+  printingObject.printText('R$ 98,90',2,0,'Verdana',[],45);
+  printingObject.printOut;
+  exit;
   nodes := xml.selectNodes('//labels//label');
   currentColumn := 1;
   nodes.reset;
@@ -74,20 +88,25 @@ begin
     n := getCopiesFromLabelNode(nodes[i]);
     while (n > 0) and (currentColumn > 1) do
     begin
-      generateColumn(nodes[i]);
+      generateColumns(nodes[i]);
       Dec(n);
     end;
-    if n > labelConfiguration.columns then
+
+    if n > 0 then
     begin
-      generateColumn(nodes[i], labelConfiguration.columns);
-      printOutLine(n div labelConfiguration.columns);
-      if (n mod labelConfiguration.columns) > 0 then
-        generateColumn(nodes[i], n mod labelConfiguration.columns);
-    end
-    else
-    begin
-      generateColumn(nodes[i], n);
+      if n > labelConfiguration.columns then
+      begin
+        generateColumns(nodes[i], labelConfiguration.columns);
+        printOutLine(n div labelConfiguration.columns);
+        if (n mod labelConfiguration.columns) > 0 then
+          generateColumns(nodes[i], n mod labelConfiguration.columns);
+      end
+      else
+      begin
+        generateColumns(nodes[i], n);
+      end;
     end;
+
   end;
   if currentColumn > 1 then
     printOutLine(1);
@@ -99,11 +118,59 @@ begin
 end;
 
 procedure TUnilabelXMLEngine.generateColumn(node: IXMLDomNode);
+var
+  elements: IXMLDomnodeList;
+  i: integer;
+  elType: string;
 begin
-  printingObject.printText('oi teste', 10,10,'Verdana',[], 30);
+  elements := node.selectNodes('element');
+  for i := 0 to elements.length-1 do
+  begin
+    elType := elements.item[i].attributes.getNamedItem('type').nodeValue;
+    if UpperCase(elType) = 'TEXT' then
+      addParsedTextElement(printingObject, elements.item[i]);
+    if UpperCase(elType) = 'BARCODE' then
+      addParsedBarcodeElement(printingObject, elements.item[i]);
+  end;
 end;
 
-procedure TUnilabelXMLEngine.generateColumn(node: IXMLDomNode; n: integer);
+procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
+  n: IXMLDOMNode);
+begin
+  printingObject.printBarcode(
+    n.attributes.getNamedItem('value').nodeValue,
+    strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset,
+    strToInt(n.attributes.getNamedItem('y').nodeValue),
+    bcfCode128,
+    10, 1, 3, false);
+end;
+
+procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
+var
+  fs: TFontStyles;
+  fontName: string;
+  fontSize: integer;
+begin
+  fontName := 'Verdana';
+  fontSize := 23;
+  if n.attributes.getNamedItem('font-name') <> nil then
+    fontName := n.attributes.getNamedItem('font-name').nodeValue;
+  if n.attributes.getNamedItem('font-size') <> nil then
+    fontSize := strToInt(n.attributes.getNamedItem('font-size').nodeValue);
+
+  printingObject.printText(
+    n.attributes.getNamedItem('value').nodeValue,
+    strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset,
+    strToInt(n.attributes.getNamedItem('y').nodeValue),
+    fontName,
+    fs,
+    fontSize
+  );
+end;
+
+
+
+procedure TUnilabelXMLEngine.generateColumns(node: IXMLDomNode; n: integer = 1);
 var
   i: integer;
 begin
@@ -133,6 +200,14 @@ begin
       result := 1;
     end;
   end;
+end;
+
+function TUnilabelXMLEngine.getXOffset: integer;
+begin
+  result :=
+    labelConfiguration.leftMargin +
+    (currentColumn-1) * labelConfiguration.width +
+    (currentColumn-1) * labelConfiguration.horizontalGap;
 end;
 
 procedure TUnilabelXMLEngine.parseConfigurations(xml: IXMLDomDocument2);

@@ -23,6 +23,7 @@ type
       height: Integer; narrowWidth: Integer; wideWidth: Integer;
       showReadable: Boolean);
     procedure printImage(path: string; x,y: Integer);
+    procedure printBox(x,y,width,height,topThickness,sideThickness: integer);
     function initializePrinter: boolean;
     procedure printOut;
     procedure closePrinter;
@@ -73,9 +74,9 @@ begin
     A_GetUSBDeviceInfo(1, PAnsiChar(buf1), @len1, PAnsiChar(buf2), @len2);
     sw := 1;
     if 0 < sw then
-      ret := A_CreatePrn(12, PAnsiChar(buf2)) // open usb.
+      ret := A_CreatePrn(12, PAnsiChar(buf2))
     else
-      ret := A_CreateUSBPort(1); // must call A_GetUSBBufferLen() function fisrt.
+      ret := A_CreateUSBPort(1);
     if 0 > ret then
     begin
       SetLength(buf1,len1);
@@ -118,15 +119,21 @@ begin
   if showReadable then
     pType := UpCase(pType);
 
-  A_Prn_Barcode(x, y, 1, pType, narrowWidth, wideWidth, height, 'N', 0,
+  A_Prn_Barcode(x*10, y*10, 1, pType, narrowWidth, wideWidth, height*10, 'N', 0,
     ansiString(data));
+end;
+
+procedure TUnilabelPPLA.printBox(x, y, width, height, topThickness,
+  sideThickness: integer);
+begin
+  A_Draw_Box('A',x,y,width,height,topThickness,sideThickness);
 end;
 
 procedure TUnilabelPPLA.printImage(path: string; x, y: Integer);
 var
   himage : HBITMAP;
 begin
-  A_Get_Graphic_ColorBMP(x, y, 1, 'B', path);
+  A_Get_Graphic_ColorBMP(x*10, y*10, 1, 'B', path);
   himage := LoadImage(0,PChar(path),IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   If 0 <> himage then
     DeleteObject(himage);
@@ -158,7 +165,7 @@ begin
   if fsItalic in fontStyles then iItalic := 1 else iItalic := 0;
   if fsUnderline in fontStyles then iUnderline := 1 else iUnderline := 0;
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;
-  A_Prn_Text_TrueType(x, y, fontSize, AnsiString(fontName), 1, iBold,
+  A_Prn_Text_TrueType(x*10, y*10, fontSize, AnsiString(fontName), 1, iBold,
     iItalic, iUnderline, iStrikeOut, ansiString(nextInternalVarName),
     Ansistring(data), 1);
 

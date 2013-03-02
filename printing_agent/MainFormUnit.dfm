@@ -29,40 +29,53 @@ object Form1: TForm1
     Height = 284
     Lines.Strings = (
       '<xml>'
-      #9'<configuration>'
-      #9'  <columns>3</columns>'
-      #9'  <label-dimension>'
-      #9'    <height>60</height> '
-      #9'    <width>35</width>'
-      #9'  </label-dimension>'
-      #9'  <margin>'
-      #9'    <left>5</left>'
-      #9'    <right>5</right>'
-      #9'    <horizontal-gap>2</horizontal-gap>'
-      #9'  </margin>'
-      #9'</configuration>'
-      #9'<labels>'
-      #9'  <label copies="7">'
-      #9'    <elements>'
-      #9'      <element type='#39'text'#39' value='#39'Le Lis Blanc'#39'>'
-      #9'        <position x='#39'10'#39' y='#39'20'#39' />'
-      
-        #9'        <font name='#39'Verdana'#39' size='#39'23'#39' bold='#39'true'#39' italic='#39'true' +
-        #39' />'
-      #9'      </element>'
-      #9'    </elements>'
-      #9'  </label>'
-      #9'  <label>'
-      #9'    <elements>'
-      #9'      <element type='#39'text'#39' value='#39'Le Lis Blanc'#39'>'
-      #9'        <position x='#39'10'#39' y='#39'20'#39' />'
-      
-        #9'        <font name='#39'Verdana'#39' size='#39'23'#39' bold='#39'true'#39' italic='#39'true' +
-        #39' />'
-      #9'      </element>'
-      #9'    </elements>'
-      #9'  </label>'
-      #9'</labels>'
+      '  <configuration>'
+      '    <columns>3</columns>'
+      '    <label-dimension>'
+      '      <height>60</height> '
+      '      <width>101</width>'
+      '    </label-dimension>'
+      '    <margin>'
+      '      <left>2</left>'
+      '      <right>2</right>'
+      '      <horizontal-gap>3</horizontal-gap>'
+      '    </margin>'
+      '  </configuration>'
+      '  <labels>'
+      '    <label copies="1">'
+      '    <element type='#39'text'#39' '
+      '            value='#39'Estopim - Blusa'#39
+      #9'    x='#39'2'#39' y='#39'30'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'text'#39' '
+      '            value='#39'09542'#39
+      #9'    x='#39'2'#39' y='#39'27'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'barcode'#39' '
+      '            value='#39'09542'#39
+      #9'    x='#39'2'#39' y='#39'21'#39' />'
+      '    <element type='#39'text'#39' '
+      '            value='#39'Estopim - Blusa'#39
+      #9'    x='#39'2'#39' y='#39'15'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'text'#39' '
+      '            value='#39'09542'#39
+      #9'    x='#39'2'#39' y='#39'12'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'barcode'#39' '
+      '            value='#39'09542'#39
+      #9'    x='#39'2'#39' y='#39'6'#39' />'
+      '    <element type='#39'text'#39' '
+      '            value='#39'R$98,90'#39
+      #9'    x='#39'2'#39' y='#39'0'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'45'#39'/>'
+      '    </label>'
+      '  </labels>'
       '</xml>')
     TabOrder = 1
   end

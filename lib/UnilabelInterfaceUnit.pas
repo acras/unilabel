@@ -22,6 +22,8 @@ type
       height, narrowWidth, wideWidth: Integer;
       showReadable: boolean);
     procedure printImage(path: string; x,y: Integer);
+    procedure printBox(x,y,width,height,topThickness,sideThickness: integer);
+
 
     //Flow Control
     function initializePrinter: boolean;
