@@ -14,7 +14,8 @@ O projeto Unilabel será um programa Delphi nativo Windows que terá o objetivo 
 Arquivo Unilabel
 O arquivo Unilabel será um arquivo XML como exemplo abaixo:
 
-<xml>
+```XML
+  <xml>
   <configuration>
     <columns>3</columns>
     <label-dimension>
@@ -29,40 +30,14 @@ O arquivo Unilabel será um arquivo XML como exemplo abaixo:
   </configuration>
   <labels>
     <label copies="1">
-    <element type='text' 
-            value='Estopim - Blusa'
-      x='2' y='30'
-	    font-name='Verdana' 
-            font-size='28'/>
-    <element type='text' 
-            value='09542'
-	    x='2' y='27'
-	    font-name='Verdana' 
-            font-size='28'/>
-    <element type='barcode' 
-            value='09542'
-	    x='2' y='21'
-            height='6'
-            narrow='2'
-            wide='6' />
-    <element type='text' 
-            value='Estopim - Blusa'
-	    x='2' y='15'
-	    font-name='Verdana' 
-            font-size='28'/>
-    <element type='text' 
-            value='09542'
-	    x='2' y='12'
-	    font-name='Verdana' 
-            font-size='28'/>
-    <element type='barcode' 
-            value='09542'
-	    x='2' y='6' />
-    <element type='text' 
-            value='R$98,90'
-	    x='2' y='0'
-	    font-name='Verdana' 
-            font-size='45'/>
+      <element type='text'  value='Estopim - Blusa'  x='2' y='30' font-name='Verdana' font-size='28'/>
+      <element type='text'  value='09542' x='2' y='27' font-name='Verdana' font-size='28'/>
+      <element type='barcode' value='09542' x='2' y='21' height='6' narrow='2' wide='6' />
+      <element type='text' value='Estopim - Blusa' x='2' y='15' font-name='Verdana' font-size='28'/>
+      <element type='text' value='09542' x='2' y='12' font-name='Verdana' font-size='28'/>
+      <element type='barcode' value='09542' x='2' y='6' />
+      <element type='text' value='R$98,90'  x='2' y='0' font-name='Verdana' font-size='45'/>
     </label>
   </labels>
 </xml>
+```
