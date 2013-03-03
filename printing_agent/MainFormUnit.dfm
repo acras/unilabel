@@ -50,7 +50,7 @@ object Form1: TForm1
       '    </margin>'
       '  </configuration>'
       '  <labels>'
-      '    <label copies="1">'
+      '    <label copies="4">'
       '    <element type='#39'text'#39' '
       '            value='#39'Estopim - Blusa'#39
       #9'    x='#39'2'#39' y='#39'30'#39
@@ -79,6 +79,39 @@ object Form1: TForm1
       #9'    x='#39'2'#39' y='#39'6'#39' />'
       '    <element type='#39'text'#39' '
       '            value='#39'R$98,90'#39
+      #9'    x='#39'2'#39' y='#39'0'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'45'#39'/>'
+      '    </label>'
+      '    <label copies="3">'
+      '    <element type='#39'text'#39' '
+      '            value='#39'Estopim - Cal'#231'a'#39
+      #9'    x='#39'2'#39' y='#39'30'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'text'#39' '
+      '            value='#39'09512'#39
+      #9'    x='#39'2'#39' y='#39'27'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'barcode'#39' '
+      '            value='#39'09512'#39
+      #9'    x='#39'2'#39' y='#39'21'#39' />'
+      '    <element type='#39'text'#39' '
+      '            value='#39'Estopim - Cal'#231'a'#39
+      #9'    x='#39'2'#39' y='#39'15'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'text'#39' '
+      '            value='#39'09512'#39
+      #9'    x='#39'2'#39' y='#39'12'#39
+      #9'    font-name='#39'Verdana'#39' '
+      '            font-size='#39'28'#39'/>'
+      '    <element type='#39'barcode'#39' '
+      '            value='#39'09512'#39
+      #9'    x='#39'2'#39' y='#39'6'#39' />'
+      '    <element type='#39'text'#39' '
+      '            value='#39'R$118,00'#39
       #9'    x='#39'2'#39' y='#39'0'#39
       #9'    font-name='#39'Verdana'#39' '
       '            font-size='#39'45'#39'/>'
