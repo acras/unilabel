@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 300
-  ClientWidth = 635
+  ClientHeight = 512
+  ClientWidth = 442
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,34 +11,42 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  DesignSize = (
+    442
+    512)
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 415
-    Top = 267
+    Left = 364
+    Top = 479
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = 'Button1'
     TabOrder = 0
     OnClick = Button1Click
+    ExplicitLeft = 552
+    ExplicitTop = 267
   end
   object Memo1: TMemo
     Left = 8
     Top = 8
-    Width = 401
-    Height = 284
+    Width = 345
+    Height = 496
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       '<xml>'
       '  <configuration>'
       '    <columns>3</columns>'
       '    <label-dimension>'
-      '      <height>60</height> '
-      '      <width>101</width>'
+      '      <height>63</height> '
+      '      <width>34</width>'
       '    </label-dimension>'
       '    <margin>'
       '      <left>2</left>'
       '      <right>2</right>'
-      '      <horizontal-gap>3</horizontal-gap>'
+      '      <bottom>2</bottom>'
+      '      <horizontal-gap>0</horizontal-gap>'
       '    </margin>'
       '  </configuration>'
       '  <labels>'
@@ -77,6 +85,7 @@ object Form1: TForm1
       '    </label>'
       '  </labels>'
       '</xml>')
+    ScrollBars = ssVertical
     TabOrder = 1
   end
 end

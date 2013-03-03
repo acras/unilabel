@@ -12,6 +12,7 @@ TLabelConfiguration = record
   height: integer;
   leftMargin: integer;
   rightMargin: integer;
+  bottomMargin: integer;
   horizontalGap: integer;
   columns: integer;
 end;
@@ -35,8 +36,10 @@ private
   procedure printOutLine(n: integer);
   procedure addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
   procedure addParsedBarcodeElement(p: IUnilabel; n: IXMLDOMNode);
-    function getXOffset: integer;
+  function getXOffset: integer;
+  function getYOffset: integer;
   property xOffset: integer read getXOffset;
+  property yOffset: integer read getYOffset;
 end;
 
 implementation
@@ -68,18 +71,18 @@ end;
 procedure TUnilabelXMLEngine.printLabels(xml: IXMLDomDocument2);
 var
   nodes: IXMLDOMNodeList;
-  i, n: integer;
+  i, j, n, numLinhas: integer;
 begin
-  printingObject.printText('Estopim - Blusa',2,30,'Verdana',[],28);
+  {printingObject.printText('Estopim - Blusa',2,30,'Verdana',[],28);
   printingObject.printText('09542',2,27,'Verdana',[],28);
-  printingObject.printBarcode('09542',2,21,bcfCode128,6,2,6,false);
+  printingObject.printBarcode('09542',100,21,bcfCode128,6,2,6,false);
   //tag
   printingObject.printText('Estopim - Blusa',2,15,'Verdana',[],28);
   printingObject.printText('09542',2,12,'Verdana',[],28);
   printingObject.printBarcode('09542',2,6,bcfCode128,6,2,6,false);
   printingObject.printText('R$ 98,90',2,0,'Verdana',[],45);
   printingObject.printOut;
-  exit;
+  exit;}
   nodes := xml.selectNodes('//labels//label');
   currentColumn := 1;
   nodes.reset;
@@ -96,8 +99,9 @@ begin
     begin
       if n > labelConfiguration.columns then
       begin
-        generateColumns(nodes[i], labelConfiguration.columns);
-        printOutLine(n div labelConfiguration.columns);
+        numLinhas := (n div labelConfiguration.columns);
+        for j := 1 to numLinhas do
+          generateColumns(nodes[i], labelConfiguration.columns);
         if (n mod labelConfiguration.columns) > 0 then
           generateColumns(nodes[i], n mod labelConfiguration.columns);
       end
@@ -136,20 +140,30 @@ end;
 
 procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
   n: IXMLDOMNode);
+var
+  value: string;
+  x, y, height, narrow, wide: integer;
 begin
-  printingObject.printBarcode(
-    n.attributes.getNamedItem('value').nodeValue,
-    strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset,
-    strToInt(n.attributes.getNamedItem('y').nodeValue),
-    bcfCode128,
-    10, 1, 3, false);
+  value := n.attributes.getNamedItem('value').nodeValue;
+  height := 6;
+  narrow := 2;
+  wide := 6;
+  if n.attributes.getNamedItem('height') <> nil then
+    height := strToInt(n.attributes.getNamedItem('height').nodeValue);
+  if n.attributes.getNamedItem('narrow') <> nil then
+    narrow := strToInt(n.attributes.getNamedItem('narrow').nodeValue);
+  if n.attributes.getNamedItem('wide') <> nil then
+    wide := strToInt(n.attributes.getNamedItem('wide').nodeValue);
+  x := strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset;
+  y := strToInt(n.attributes.getNamedItem('y').nodeValue) + yOffset;
+  printingObject.printBarcode(value,x,y,bcfCode128,height,narrow,wide,false);
 end;
 
 procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
 var
   fs: TFontStyles;
-  fontName: string;
-  fontSize: integer;
+  fontName, value: string;
+  x,y,fontSize: integer;
 begin
   fontName := 'Verdana';
   fontSize := 23;
@@ -157,15 +171,10 @@ begin
     fontName := n.attributes.getNamedItem('font-name').nodeValue;
   if n.attributes.getNamedItem('font-size') <> nil then
     fontSize := strToInt(n.attributes.getNamedItem('font-size').nodeValue);
-
-  printingObject.printText(
-    n.attributes.getNamedItem('value').nodeValue,
-    strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset,
-    strToInt(n.attributes.getNamedItem('y').nodeValue),
-    fontName,
-    fs,
-    fontSize
-  );
+  value := n.attributes.getNamedItem('value').nodeValue;
+  x := strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset;
+  y := strToInt(n.attributes.getNamedItem('y').nodeValue) + yOffset;
+  printingObject.printText(value,x,y,fontName,fs,fontSize);
 end;
 
 
@@ -210,6 +219,11 @@ begin
     (currentColumn-1) * labelConfiguration.horizontalGap;
 end;
 
+function TUnilabelXMLEngine.getYOffset: integer;
+begin
+  result := labelConfiguration.bottomMargin;
+end;
+
 procedure TUnilabelXMLEngine.parseConfigurations(xml: IXMLDomDocument2);
 begin
   labelConfiguration.width := parseIntegerProperty(xml,
@@ -217,9 +231,11 @@ begin
   labelConfiguration.height := parseIntegerProperty(xml,
     '//configuration//label-dimension//height');
   labelConfiguration.leftMargin := parseIntegerProperty(xml,
-    '//configuration//margin//left-margin', 0);
+    '//configuration//margin//left', 0);
   labelConfiguration.rightMargin := parseIntegerProperty(xml,
-    '//configuration//margin//right-margin', 0);
+    '//configuration//margin//right', 0);
+  labelConfiguration.bottomMargin := parseIntegerProperty(xml,
+    '//configuration//margin//bottom', 0);
   labelConfiguration.horizontalGap := parseIntegerProperty(xml,
     '//configuration//margin//horizontal-gap', 0);
   labelConfiguration.columns := parseIntegerProperty(xml,
