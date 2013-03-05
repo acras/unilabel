@@ -1,0 +1,37 @@
+<xml>
+  <configuration>
+    <columns>1</columns>
+    <label-dimension>
+      <height>14</height> 
+      <width>99</width>
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>0</right>
+      <bottom>0</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+  </configuration>
+  <labels>
+    <label copies="4">
+    <element type='text' 
+            value='Anel de diamantes'
+	    x='2' y='7'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='text' 
+            value='R$48.918,99'
+	    x='2' y='0'
+	    font-name='Verdana' 
+            font-size='36'/>
+    <element type='barcode' 
+            value='09542'
+	    x='35' y='5' />
+    <element type='text' 
+            value='05987'
+	    x='35' y='0'
+	    font-name='Verdana' 
+            font-size='28'/>
+    </label>
+  </labels>
+</xml>

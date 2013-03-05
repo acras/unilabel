@@ -1,0 +1,83 @@
+<xml>
+  <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>63</height> 
+      <width>34</width>
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>2</right>
+      <bottom>2</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+  </configuration>
+  <labels>
+    <label copies="4">
+    <element type='text' 
+            value='Estopim - Blusa'
+	    x='2' y='30'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='text' 
+            value='09542'
+	    x='2' y='27'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='barcode' 
+            value='09542'
+	    x='2' y='21' />
+    <element type='text' 
+            value='Estopim - Blusa'
+	    x='2' y='15'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='text' 
+            value='09542'
+	    x='2' y='12'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='barcode' 
+            value='09542'
+	    x='2' y='6' />
+    <element type='text' 
+            value='R$98,90'
+	    x='2' y='0'
+	    font-name='Verdana' 
+            font-size='45'/>
+    </label>
+    <label copies="3">
+    <element type='text' 
+            value='Estopim - Calça'
+	    x='2' y='30'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='text' 
+            value='09512'
+	    x='2' y='27'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='barcode' 
+            value='09512'
+	    x='2' y='21' />
+    <element type='text' 
+            value='Estopim - Calça'
+	    x='2' y='15'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='text' 
+            value='09512'
+	    x='2' y='12'
+	    font-name='Verdana' 
+            font-size='28'/>
+    <element type='barcode' 
+            value='09512'
+	    x='2' y='6' />
+    <element type='text' 
+            value='R$118,00'
+	    x='2' y='0'
+	    font-name='Verdana' 
+            font-size='45'/>
+    </label>
+  </labels>
+</xml>
