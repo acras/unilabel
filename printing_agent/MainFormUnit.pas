@@ -8,13 +8,12 @@ uses
 
 type
   TForm1 = class(TForm)
-    Button1: TButton;
-    Memo1: TMemo;
-    procedure Button1Click(Sender: TObject);
+    btnImprimir: TButton;
+    OpenDialog: TOpenDialog;
+    procedure btnImprimirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
-  public
-    { Public declarations }
+    procedure printFile(fn: string);
   end;
 
 var
@@ -26,14 +25,38 @@ implementation
 
 uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.printFile(fn: string);
 var
   ppla: TUnilabelPPLA;
   engine: TUnilabelXMLEngine;
+  contents: TStringList;
 begin
   ppla := TUnilabelPPLA.create;
   engine := TUnilabelXMLEngine.Create(ppla);
-  engine.print(Memo1.Lines.GetText);
+  contents := TStringList.Create;
+  try
+    contents.LoadFromFile(fn);
+    engine.print(contents.GetText);
+  finally
+    FreeAndNil(engine);
+    FreeAndNil(contents);
+  end;
+end;
+
+procedure TForm1.btnImprimirClick(Sender: TObject);
+begin
+  with OpenDialog do
+    if execute then
+      printFile(FileName);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  if ParamStr(1) <> '' then
+  begin
+    printFile(ParamStr(1));
+    application.Terminate;
+  end;
 end;
 
 end.

@@ -1,0 +1,25 @@
+<xml>
+  <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>21</height> 
+      <width>33</width>
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>2</right>
+      <horizontal-gap>2</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='text' field='description'  x='2' y='17' font-name='Verdana' font-size='28'/>
+      <element type='text' field='code' x='2' y='13' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='2' y='1' height='6' narrow='2' wide='6' />
+    </layout>
+  </configuration>
+  <data>
+    <record copies="5" description="Estopim - Blusa" code='09542' barcode='09542' price='R$89,90' />
+    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
+    <record copies="7" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
+    <record copies="1" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
+  </data>
+</xml>

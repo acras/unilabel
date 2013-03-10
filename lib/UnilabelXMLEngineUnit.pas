@@ -26,6 +26,7 @@ private
   printingObject: IUnilabel;
   labelConfiguration: TLabelConfiguration;
   currentColumn: integer;
+  labelLayout: IXMLDOMNode;
   procedure parseConfigurations(xml: IXMLDomDocument2);
   function parseIntegerProperty(xml: IXMLDomDocument2;
     path: string; defaultValue: integer = 1): integer;
@@ -34,8 +35,10 @@ private
   procedure generateColumn(node: IXMLDomNode); overload;
   procedure generateColumns(node: IXMLDomNode; n: integer = 1); overload;
   procedure printOutLine(n: integer);
-  procedure addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
-  procedure addParsedBarcodeElement(p: IUnilabel; n: IXMLDOMNode);
+  procedure addParsedTextElement(p: IUnilabel;
+    layoutNode, dataNode: IXMLDOMNode);
+  procedure addParsedBarcodeElement(p: IUnilabel;
+    layoutNode, dataNode: IXMLDOMNode);
   function getXOffset: integer;
   function getYOffset: integer;
   property xOffset: integer read getXOffset;
@@ -83,7 +86,8 @@ begin
   printingObject.printText('R$ 98,90',2,0,'Verdana',[],45);
   printingObject.printOut;
   exit;}
-  nodes := xml.selectNodes('//labels//label');
+  nodes := xml.selectNodes('//record');
+  labelLayout := xml.selectSingleNode('//configuration//layout');
   currentColumn := 1;
   nodes.reset;
   for i := 0 to nodes.length -1 do
@@ -127,53 +131,56 @@ var
   i: integer;
   elType: string;
 begin
-  elements := node.selectNodes('element');
+  elements := labelLayout.selectNodes('element');
   for i := 0 to elements.length-1 do
   begin
     elType := elements.item[i].attributes.getNamedItem('type').nodeValue;
     if UpperCase(elType) = 'TEXT' then
-      addParsedTextElement(printingObject, elements.item[i]);
+      addParsedTextElement(printingObject, elements.item[i], node);
     if UpperCase(elType) = 'BARCODE' then
-      addParsedBarcodeElement(printingObject, elements.item[i]);
+      addParsedBarcodeElement(printingObject, elements.item[i], node);
   end;
 end;
 
 procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
-  n: IXMLDOMNode);
+  layoutNode, dataNode: IXMLDOMNode);
 var
-  value: string;
+  fieldName, value: string;
   x, y, height, narrow, wide: integer;
 begin
-  value := n.attributes.getNamedItem('value').nodeValue;
+  fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
+  value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
   height := 6;
   narrow := 2;
   wide := 6;
-  if n.attributes.getNamedItem('height') <> nil then
-    height := strToInt(n.attributes.getNamedItem('height').nodeValue);
-  if n.attributes.getNamedItem('narrow') <> nil then
-    narrow := strToInt(n.attributes.getNamedItem('narrow').nodeValue);
-  if n.attributes.getNamedItem('wide') <> nil then
-    wide := strToInt(n.attributes.getNamedItem('wide').nodeValue);
-  x := strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset;
-  y := strToInt(n.attributes.getNamedItem('y').nodeValue) + yOffset;
+  if layoutNode.attributes.getNamedItem('height') <> nil then
+    height := strToInt(layoutNode.attributes.getNamedItem('height').nodeValue);
+  if layoutNode.attributes.getNamedItem('narrow') <> nil then
+    narrow := strToInt(layoutNode.attributes.getNamedItem('narrow').nodeValue);
+  if layoutNode.attributes.getNamedItem('wide') <> nil then
+    wide := strToInt(layoutNode.attributes.getNamedItem('wide').nodeValue);
+  x := strToInt(layoutNode.attributes.getNamedItem('x').nodeValue) + xOffset;
+  y := strToInt(layoutNode.attributes.getNamedItem('y').nodeValue) + yOffset;
   printingObject.printBarcode(value,x,y,bcfCode128,height,narrow,wide,false);
 end;
 
-procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel; n: IXMLDOMNode);
+procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel;
+  layoutNode, dataNode: IXMLDOMNode);
 var
   fs: TFontStyles;
-  fontName, value: string;
+  fieldName, fontName, value: string;
   x,y,fontSize: integer;
 begin
   fontName := 'Verdana';
   fontSize := 23;
-  if n.attributes.getNamedItem('font-name') <> nil then
-    fontName := n.attributes.getNamedItem('font-name').nodeValue;
-  if n.attributes.getNamedItem('font-size') <> nil then
-    fontSize := strToInt(n.attributes.getNamedItem('font-size').nodeValue);
-  value := n.attributes.getNamedItem('value').nodeValue;
-  x := strToInt(n.attributes.getNamedItem('x').nodeValue) + xOffset;
-  y := strToInt(n.attributes.getNamedItem('y').nodeValue) + yOffset;
+  if layoutNode.attributes.getNamedItem('font-name') <> nil then
+    fontName := layoutNode.attributes.getNamedItem('font-name').nodeValue;
+  if layoutNode.attributes.getNamedItem('font-size') <> nil then
+    fontSize := strToInt(layoutNode.attributes.getNamedItem('font-size').nodeValue);
+  fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
+  value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
+  x := strToInt(layoutNode.attributes.getNamedItem('x').nodeValue) + xOffset;
+  y := strToInt(layoutNode.attributes.getNamedItem('y').nodeValue) + yOffset;
   printingObject.printText(value,x,y,fontName,fs,fontSize);
 end;
 
