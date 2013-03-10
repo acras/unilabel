@@ -12,69 +12,37 @@ Projeto Unilabel
 O projeto Unilabel será um programa Delphi nativo Windows que terá o objetivo de comunicar diretamente com as impressoras. Ele receberá de entrada um arquivo no formato Unilabel (XML especializado) e então fará a impressão.
 
 Arquivo Unilabel
-O arquivo Unilabel será um arquivo XML que deverá permitir as seguintes configurações:
+O arquivo Unilabel será um arquivo XML como exemplo abaixo:
 
-Altura das etiquetas
-Largura de cada etiqueta
-Número de colunas
-Margem esquerda
-Gap lateral entre etiquetas
-*Etiquetas
-Quantidade
-*Elementos
-Propriedades do elemento
-Type: (texto, barras, imagem, linha, retangulo)
-x
-y
-height
-width
-data
-font
-name
-syze
-bold
-italic
-underline
-strike
-bar_code
-type
-show_text
-narrow_width
-wide_width
-image
-filename
-Funcionamento
-O unilabel irá efetuar as seguintes operações:
-
-1 - Localizar a impressora
-2 - Enviar comandos de impressão com base nas etiquetas que deve imprimir da seguinte forma
-
-  colAtual = 1
-  PARA cada Etiqueta
-    n = quantidade a imprimir desta etiqueta
-    ENQUANTO (n > 0) E (colAtual > 1)
-      gerarColuna
-      n--
-    FIMENQUANTO
-    SE n > numColunas
-      imprimirLinha(n mod numColunas)
-      gerarNColunas(n div numColunas)
-    SENAO
-      gerarNColunas(n)
-    FIMSE
-  FIMPARA
-
-O gerarLinha deve chamar o gerarColuna n vezes, onde n é o número de colunas e então mandar imprimir n/numColunas cópias.
-O gerarColuna deve gerar uma coluna em memória, sem mandar pra impressora, conforme esquema abaixo.
-O gerarNColunas deve chamar N vezese se chegou ao final das colunas zerar a coluna atual e mandar imprimir a linha.
-
-O gerarColuna deve:
-
-receber uma instância de ILabelPrinter, a coluna e os dados do papel e da etiqueta.
-Aplicar um offset lateral necessário sendo ele = margemEsquerda + ((numColuna-1)*gapEntreColunas)
-Chamar as funções conforme os dados uma coluna com o offset necessário
-Geração de etiquetas para o uniLabel
-Do lado do FocusLojas teremos que ter a geração do arquivo formato Unilabel. Basicamente teremos o modelo que será um arquivo equivalente. A seção de informações do papel será hard coded no arquivo do modelo e a parte da etiqueta poderá ser gerada de outras formas a se estudar.
-
-Problemas a serem resolvidos
-Word wrap: http://stackoverflow.com/questions/13652950/word-wrap-text-in-argox-os214-ppla
+```XML
+<xml>
+  <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>63</height> 
+      <width>34</width>
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>2</right>
+      <bottom>2</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='text' field='description' x='2' y='30' font-name='Verdana' font-size='28'/>
+      <element type='text' field='code' x='2' y='27' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='2' y='21' />
+      <element type='text' field='description' x='2' y='15' font-name='Verdana' font-size='28'/>
+      <element type='text' field='code' x='2' y='12' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='2' y='6' />
+      <element type='text' field='price' x='2' y='0' font-name='Verdana' font-size='45'/>
+    </layout>
+  </configuration>
+  <data>
+    <record copies="4" description='Anel de diamantes' code='05987' barcode='05987' price='R$48.918,99'>
+    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
+    <record copies="7" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
+    <record copies="1" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
+  </data>
+</xml>
+```
