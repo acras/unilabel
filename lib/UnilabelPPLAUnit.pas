@@ -167,7 +167,7 @@ begin
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;
   A_Prn_Text_TrueType(x*10, y*10, fontSize, AnsiString(fontName), 1, iBold,
     iItalic, iUnderline, iStrikeOut, ansiString(nextInternalVarName),
-    Ansistring(data), 1);
+    Ansistring(Utf8ToAnsi(data)), 1);
 
 end;
 

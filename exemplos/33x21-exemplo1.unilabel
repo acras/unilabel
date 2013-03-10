@@ -11,9 +11,10 @@
       <horizontal-gap>2</horizontal-gap>
     </margin>
     <layout>
-      <element type='text' field='description'  x='2' y='17' font-name='Verdana' font-size='28'/>
-      <element type='text' field='code' x='2' y='13' font-name='Verdana' font-size='28'/>
-      <element type='barcode' field='barcode' x='2' y='1' height='6' narrow='2' wide='6' />
+      <element type='text' field='description'  x='2' y='16' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='2' y='10' height='6' narrow='2' wide='6' />
+      <element type='text' field='code' x='2' y='7' font-name='Verdana' font-size='28'/>
+      <element type='text' field='price' x='2' y='0' font-name='Verdana' font-size='42'/>
     </layout>
   </configuration>
   <data>
