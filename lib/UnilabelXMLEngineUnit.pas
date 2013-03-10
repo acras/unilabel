@@ -27,6 +27,7 @@ private
   labelConfiguration: TLabelConfiguration;
   currentColumn: integer;
   labelLayout: IXMLDOMNode;
+  fsUSA: TFormatSettings;
   procedure parseConfigurations(xml: IXMLDomDocument2);
   function parseIntegerProperty(xml: IXMLDomDocument2;
     path: string; defaultValue: integer = 1): integer;
@@ -41,6 +42,7 @@ private
     layoutNode, dataNode: IXMLDOMNode);
   function getXOffset: integer;
   function getYOffset: integer;
+  function parseBarcodeType(value: string): TUnilabelBarcodeFormats;
   property xOffset: integer read getXOffset;
   property yOffset: integer read getYOffset;
 end;
@@ -53,6 +55,8 @@ constructor TUnilabelXMLEngine.Create(pPrintingObject: IUnilabel);
 begin
   printingObject := pPrintingObject;
   printingObject.initializePrinter;
+  fsUSA.DecimalSeparator := '.';
+  fsUSA.ThousandSeparator := #0;
 end;
 
 destructor TUnilabelXMLEngine.Destroy;
@@ -76,16 +80,6 @@ var
   nodes: IXMLDOMNodeList;
   i, j, n, numLinhas: integer;
 begin
-  {printingObject.printText('Estopim - Blusa',2,30,'Verdana',[],28);
-  printingObject.printText('09542',2,27,'Verdana',[],28);
-  printingObject.printBarcode('09542',100,21,bcfCode128,6,2,6,false);
-  //tag
-  printingObject.printText('Estopim - Blusa',2,15,'Verdana',[],28);
-  printingObject.printText('09542',2,12,'Verdana',[],28);
-  printingObject.printBarcode('09542',2,6,bcfCode128,6,2,6,false);
-  printingObject.printText('R$ 98,90',2,0,'Verdana',[],45);
-  printingObject.printOut;
-  exit;}
   nodes := xml.selectNodes('//record');
   labelLayout := xml.selectSingleNode('//configuration//layout');
   currentColumn := 1;
@@ -146,22 +140,38 @@ procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
   layoutNode, dataNode: IXMLDOMNode);
 var
   fieldName, value: string;
-  x, y, height, narrow, wide: integer;
+  x, y, height: Double;
+  narrow, wide: integer;
+  barcodeType: TUnilabelBarcodeFormats;
 begin
   fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
   value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
   height := 6;
   narrow := 2;
   wide := 6;
+  barcodeType := bcfCode128;
+  if layoutNode.attributes.getNamedItem('barcode-type') <> nil then
+    barcodeType := parseBarcodeType(layoutNode.attributes.getNamedItem('barcode-type').nodeValue);
   if layoutNode.attributes.getNamedItem('height') <> nil then
-    height := strToInt(layoutNode.attributes.getNamedItem('height').nodeValue);
+    height := StrToFloat(layoutNode.attributes.getNamedItem('height').nodeValue, fsUSA);
   if layoutNode.attributes.getNamedItem('narrow') <> nil then
-    narrow := strToInt(layoutNode.attributes.getNamedItem('narrow').nodeValue);
+    narrow := StrToInt(layoutNode.attributes.getNamedItem('narrow').nodeValue);
   if layoutNode.attributes.getNamedItem('wide') <> nil then
-    wide := strToInt(layoutNode.attributes.getNamedItem('wide').nodeValue);
-  x := strToInt(layoutNode.attributes.getNamedItem('x').nodeValue) + xOffset;
-  y := strToInt(layoutNode.attributes.getNamedItem('y').nodeValue) + yOffset;
-  printingObject.printBarcode(value,x,y,bcfCode128,height,narrow,wide,false);
+    wide := StrToInt(layoutNode.attributes.getNamedItem('wide').nodeValue);
+  x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
+  y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
+  if barcodeType = bcfCode3of9 then
+    value := UpperCase(value);
+  printingObject.printBarcode(value,x,y,barcodeType,height,narrow,wide,false);
+end;
+
+function TUnilabelXMLEngine.parseBarcodeType(value: string): TUnilabelBarcodeFormats;
+begin
+  result := bcfCode128;
+  if UpperCase(value) = 'CODE128' then
+    result := bcfCode128; //redundant for the sake of readability
+  if UpperCase(value) = 'CODE3OF9' then
+    result := bcfCode3of9;
 end;
 
 procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel;
@@ -169,18 +179,18 @@ procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel;
 var
   fs: TFontStyles;
   fieldName, fontName, value: string;
-  x,y,fontSize: integer;
+  x,y,fontSize: double;
 begin
   fontName := 'Verdana';
   fontSize := 23;
   if layoutNode.attributes.getNamedItem('font-name') <> nil then
     fontName := layoutNode.attributes.getNamedItem('font-name').nodeValue;
   if layoutNode.attributes.getNamedItem('font-size') <> nil then
-    fontSize := strToInt(layoutNode.attributes.getNamedItem('font-size').nodeValue);
+    fontSize := StrToFloat(layoutNode.attributes.getNamedItem('font-size').nodeValue, fsUSA);
   fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
   value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
-  x := strToInt(layoutNode.attributes.getNamedItem('x').nodeValue) + xOffset;
-  y := strToInt(layoutNode.attributes.getNamedItem('y').nodeValue) + yOffset;
+  x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
+  y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
   printingObject.printText(value,x,y,fontName,fs,fontSize);
 end;
 

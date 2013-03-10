@@ -11,16 +11,16 @@
       <horizontal-gap>2</horizontal-gap>
     </margin>
     <layout>
-      <element type='text' field='description'  x='2' y='16' font-name='Verdana' font-size='28'/>
-      <element type='barcode' field='barcode' x='2' y='10' height='6' narrow='2' wide='6' />
-      <element type='text' field='code' x='2' y='7' font-name='Verdana' font-size='28'/>
-      <element type='text' field='price' x='2' y='0' font-name='Verdana' font-size='42'/>
+      <element type='text' field='description'  x='1.5' y='16' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='1.5' y='9' barcode-type='code3of9' height='7' narrow='1' wide='4' />
+      <element type='text' field='code' x='1.5' y='5' font-name='Verdana' font-size='28'/>
+      <element type='text' field='price' x='1.5' y='0' font-name='Verdana' font-size='42'/>
     </layout>
   </configuration>
   <data>
-    <record copies="5" description="Estopim - Blusa" code='09542' barcode='09542' price='R$89,90' />
-    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
-    <record copies="7" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
-    <record copies="1" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
+    <record copies="2" description="Estopim - Blusa" code='09542' barcode='0LC10' price='R$89,90' />
+    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='0L310' price='R$129,90' />
+    <record copies="1" description="Alphorria - Sapato" code='12242' barcode='0LC10' price='R$114,90' />
+    <record copies="1" description="Estopim - Short" code='548752' barcode='0LC10' price='R$321,90' />
   </data>
 </xml>

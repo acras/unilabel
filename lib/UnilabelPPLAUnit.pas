@@ -10,27 +10,27 @@ type
 
   public
     constructor create;
-    procedure printText(data: string; x: Integer; y: Integer; fontName: string;
-      fontStyles: TFontStyles; fontSize: Integer);
-    procedure printOrientedText(data: string; x: Integer; y: Integer;
+    procedure printText(data: string; x: double; y: double; fontName: string;
+      fontStyles: TFontStyles; fontSize: double);
+    procedure printOrientedText(data: string; x: double; y: double;
       orientation: Integer; fontName: string; fontStyles: TFontStyles;
-      fontSize: Integer);
-    procedure printBarcode(data: string; x: Integer; y: Integer;
-      barcodeType: TUnilabelBarcodeFormats; height: Integer;
-      narrowWidth: Integer; wideWidth: Integer; showReadable: Boolean);
-    procedure printOrientedBarcode(data: string; x: Integer; y: Integer;
+      fontSize: double);
+    procedure printBarcode(data: string; x: double; y: double;
+      barcodeType: TUnilabelBarcodeFormats; height: double;
+      narrowWidth: integer; wideWidth: integer; showReadable: Boolean);
+    procedure printOrientedBarcode(data: string; x: double; y: double;
       orientation: Integer; barcodeType: TUnilabelBarcodeFormats;
-      height: Integer; narrowWidth: Integer; wideWidth: Integer;
+      height: double; narrowWidth: integer; wideWidth: integer;
       showReadable: Boolean);
-    procedure printImage(path: string; x,y: Integer);
-    procedure printBox(x,y,width,height,topThickness,sideThickness: integer);
+    procedure printImage(path: string; x,y: double);
+    procedure printBox(x,y,width,height,topThickness,sideThickness: double);
     function initializePrinter: boolean;
     procedure printOut;
     procedure closePrinter;
   protected
     var currentInternalVarIndex: integer;
     function nextInternalVarName: string;
-    procedure validateBarcodeParameters(narrowWidth, wideWidth: integer);
+    procedure validateBarcodeParameters(narrowWidth, wideWidth: double);
   end;
 
 implementation
@@ -106,48 +106,56 @@ begin
   inc(currentInternalVarIndex);
 end;
 
-procedure TUnilabelPPLA.printBarcode(data: string; x, y: Integer;
-  barcodeType: TUnilabelBarcodeFormats; height, narrowWidth, wideWidth: Integer;
+procedure TUnilabelPPLA.printBarcode(data: string; x, y: double;
+  barcodeType: TUnilabelBarcodeFormats; height: double;
+  narrowWidth, wideWidth: integer;
   showReadable: Boolean);
 var
   pType: char;
+  px, py: integer;
 begin
   validateBarcodeParameters(narrowWidth, wideWidth);
   pType := 'a';
+  px := Trunc(x * 10);
+  py := Trunc(y * 10);
   if barcodeType = bcfCode128 then
     pType := 'e';
+  if barcodeType = bcfCode3of9 then
+    pType := 'a';
   if showReadable then
     pType := UpCase(pType);
 
-  A_Prn_Barcode(x*10, y*10, 1, pType, narrowWidth, wideWidth, height*10, 'N', 0,
-    ansiString(data));
+  A_Prn_Barcode(pX, pY, 1, pType, narrowWidth, wideWidth,
+    trunc(height*10), 'N', 0, ansiString(data));
 end;
 
 procedure TUnilabelPPLA.printBox(x, y, width, height, topThickness,
-  sideThickness: integer);
+  sideThickness: double);
 begin
-  A_Draw_Box('A',x,y,width,height,topThickness,sideThickness);
+  A_Draw_Box('A',trunc(x*10),trunc(y*10),trunc(width*10),trunc(height*10),
+    trunc(topThickness*10),trunc(sideThickness*10));
 end;
 
-procedure TUnilabelPPLA.printImage(path: string; x, y: Integer);
+procedure TUnilabelPPLA.printImage(path: string; x, y: double);
 var
   himage : HBITMAP;
 begin
-  A_Get_Graphic_ColorBMP(x*10, y*10, 1, 'B', path);
+  A_Get_Graphic_ColorBMP(trunc(x*10), trunc(y*10), 1, 'B', path);
   himage := LoadImage(0,PChar(path),IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   If 0 <> himage then
     DeleteObject(himage);
 end;
 
-procedure TUnilabelPPLA.printOrientedBarcode(data: string; x, y, orientation: Integer;
-  barcodeType: TUnilabelBarcodeFormats; height, narrowWidth, wideWidth: Integer;
-  showReadable: Boolean);
+procedure TUnilabelPPLA.printOrientedBarcode(data: string; x, y: double;
+   orientation: integer; barcodeType: TUnilabelBarcodeFormats;
+   height: double; narrowWidth, wideWidth: integer; showReadable: Boolean);
 begin
 
 end;
 
-procedure TUnilabelPPLA.printOrientedText(data: string; x, y, orientation: Integer;
-  fontName: string; fontStyles: TFontStyles; fontSize: Integer);
+procedure TUnilabelPPLA.printOrientedText(data: string; x, y: double;
+  orientation: integer; fontName: string; fontStyles: TFontStyles;
+  fontSize: double);
 begin
 end;
 
@@ -156,8 +164,8 @@ begin
   A_Print_Out(1, 1, 1, 1);
 end;
 
-procedure TUnilabelPPLA.printText(data: string; x, y: Integer; fontName: string;
-  fontStyles: TFontStyles; fontSize: Integer);
+procedure TUnilabelPPLA.printText(data: string; x, y: double; fontName: string;
+  fontStyles: TFontStyles; fontSize: double);
 var
   iBold, iItalic, iUnderline, iStrikeOut: integer;
 begin
@@ -165,14 +173,15 @@ begin
   if fsItalic in fontStyles then iItalic := 1 else iItalic := 0;
   if fsUnderline in fontStyles then iUnderline := 1 else iUnderline := 0;
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;
-  A_Prn_Text_TrueType(x*10, y*10, fontSize, AnsiString(fontName), 1, iBold,
+  A_Prn_Text_TrueType(trunc(x*10), trunc(y*10),
+    trunc(fontSize), AnsiString(fontName), 1, iBold,
     iItalic, iUnderline, iStrikeOut, ansiString(nextInternalVarName),
     Ansistring(Utf8ToAnsi(data)), 1);
 
 end;
 
 procedure TUnilabelPPLA.validateBarcodeParameters(narrowWidth,
-  wideWidth: integer);
+  wideWidth: double);
 begin
   if (narrowWidth > 24) or (narrowWidth < 0) then
     raise Exception.Create('Invalid narrow width value. Must be between 0 and 24');
