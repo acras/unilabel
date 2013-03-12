@@ -13,6 +13,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Impressão de Etiquetas';
   Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

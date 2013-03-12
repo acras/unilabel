@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Impress'#227'o'
-  ClientHeight = 93
-  ClientWidth = 244
+  Caption = 'Impress'#227'o de Etiquetas'
+  ClientHeight = 64
+  ClientWidth = 191
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,7 +34,7 @@ object Form1: TForm1
     Filter = 
       'Arquivos Compat'#237'veis Unilabel|*.unilabel;*.xml|Todos os Arquivos' +
       '|*.*'
-    Left = 200
+    Left = 280
     Top = 8
   end
 end

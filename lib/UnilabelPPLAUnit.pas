@@ -40,8 +40,6 @@ implementation
 uses PPLADLLWrapper;
 
 var dpCrLf: AnsiString = chr(13)+chr(10);
-var szSavePath: String = 'C:\users\acras\desktop\Argox';
-var szSaveFile: AnsiString = 'C:\users\acras\desktop\Argox\PPLA_Example.Prn';
 var sznop1: AnsiString = 'nop_front' + Chr(13) + chr(10);
 var sznop2: AnsiString = 'nop_middle' + Chr(13) + chr(10);
 
@@ -85,8 +83,12 @@ begin
   end
   else
   begin
-    TDirectory.CreateDirectory(szSavePath);
-    ret := A_CreatePrn(0, szSaveFile);
+    raise Exception.Create(
+      'Não foi possível localizar a impressora.' + #13#10 +
+      'Certifique-se de que ela está conectada ao computador,' + #13#10 +
+      'ligada e com os dois leds frontais acesos.');
+    //TDirectory.CreateDirectory(szSavePath);
+    //ret := A_CreatePrn(0, szSaveFile);
   end;
 
   result := ret <= 0;
@@ -140,7 +142,7 @@ procedure TUnilabelPPLA.printImage(path: string; x, y: double);
 var
   himage : HBITMAP;
 begin
-  A_Get_Graphic_ColorBMP(trunc(x*10), trunc(y*10), 1, 'B', path);
+  A_Get_Graphic_ColorBMP(trunc(x*10), trunc(y*10), 1, 'B', AnsiString(path));
   himage := LoadImage(0,PChar(path),IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   If 0 <> himage then
     DeleteObject(himage);

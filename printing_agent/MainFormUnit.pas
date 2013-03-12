@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.Win.Registry,
+  shellapi, ShlObj;
 
 type
   TForm1 = class(TForm)
@@ -14,6 +15,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     procedure printFile(fn: string);
+    procedure associateFileType;
   end;
 
 var
@@ -56,6 +58,24 @@ begin
   begin
     printFile(ParamStr(1));
     application.Terminate;
+  end;
+  associateFileType;
+end;
+
+procedure TForm1.associateFileType;
+begin
+  with TRegistry.Create do
+  try
+    RootKey := HKEY_CURRENT_USER;
+    if OpenKey('\Software\Classes\.unilabel', true) then
+      WriteString('', 'UnilabelAppDoc');
+    if OpenKey('\Software\Classes\UnilabelAppDoc', true) then
+      WriteString('', 'Etiquetas Unilabel');
+    if OpenKey('\Software\Classes\UnilabelAppDoc\shell\open\command', true) then
+      WriteString('', application.ExeName + ' "%1"');
+    SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, 0, 0);
+  finally
+    Free;
   end;
 end;
 
