@@ -5,7 +5,7 @@ Source: ..\..\lib_files\WinPort.dll; DestDir: {userappdata}\UnilabelPrintingAgen
 Source: ..\..\lib_files\WinPort.lib; DestDir: {userappdata}\UnilabelPrintingAgent
 Source: ..\..\lib_files\Winppla.lib; DestDir: {userappdata}\UnilabelPrintingAgent
 [Run]
-Filename: {userappdata}\UnilabelPrintingAgent\UnilabelPrintingAgent.exe
+Filename: {userappdata}\UnilabelPrintingAgent\UnilabelPrintingAgent.exe; Flags: nowait
 [Setup]
 AppName=Unilabel Printing Agent
 AppVerName=Unilabel Printing Agent 1.0

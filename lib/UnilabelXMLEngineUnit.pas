@@ -2,8 +2,8 @@ unit UnilabelXMLEngineUnit;
 
 interface
 
-uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs, MSXML2_TLB,
-  ComObj, System.SysUtils, Vcl.Graphics;
+uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs,
+  MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics;
 
 type
 
@@ -43,6 +43,8 @@ private
   function getXOffset: integer;
   function getYOffset: integer;
   function parseBarcodeType(value: string): TUnilabelBarcodeFormats;
+    procedure addParsedImageElement(p: IUnilabel; layoutNode,
+      dataNode: IXMLDOMNode);
   property xOffset: integer read getXOffset;
   property yOffset: integer read getYOffset;
 end;
@@ -133,7 +135,22 @@ begin
       addParsedTextElement(printingObject, elements.item[i], node);
     if UpperCase(elType) = 'BARCODE' then
       addParsedBarcodeElement(printingObject, elements.item[i], node);
+    if UpperCase(elType) = 'IMAGE' then
+      addParsedImageElement(printingObject, elements.item[i], node);
   end;
+end;
+
+procedure TUnilabelXMLEngine.addParsedImageElement(p: IUnilabel;
+  layoutNode, dataNode: IXMLDOMNode);
+var
+  path, value: string;
+  x, y: Double;
+begin
+  value := layoutNode.attributes.getNamedItem('value').nodeValue;
+  path := 'images\' + value;
+  x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
+  y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
+  printingObject.printImage(path,x,y);
 end;
 
 procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
@@ -180,15 +197,23 @@ var
   fs: TFontStyles;
   fieldName, fontName, value: string;
   x,y,fontSize: double;
+  orientation: integer;
 begin
   fontName := 'Verdana';
   fontSize := 23;
+  if layoutNode.attributes.getNamedItem('orientation') <> nil then
+    orientation := StrToInt(layoutNode.attributes.getNamedItem('orientation').nodeValue);
   if layoutNode.attributes.getNamedItem('font-name') <> nil then
     fontName := layoutNode.attributes.getNamedItem('font-name').nodeValue;
   if layoutNode.attributes.getNamedItem('font-size') <> nil then
     fontSize := StrToFloat(layoutNode.attributes.getNamedItem('font-size').nodeValue, fsUSA);
-  fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
-  value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
+  fieldName := '';
+  if layoutNode.attributes.getNamedItem('field') <> nil then
+    fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
+  if fieldName <> '' then
+    value := dataNode.attributes.getNamedItem(fieldName).nodeValue
+  else
+    value := layoutNode.attributes.getNamedItem('value').nodeValue;
   x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
   y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
   printingObject.printText(value,x,y,fontName,fs,fontSize);

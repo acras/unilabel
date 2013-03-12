@@ -11,17 +11,11 @@ type
   public
     constructor create;
     procedure printText(data: string; x: double; y: double; fontName: string;
-      fontStyles: TFontStyles; fontSize: double);
-    procedure printOrientedText(data: string; x: double; y: double;
-      orientation: Integer; fontName: string; fontStyles: TFontStyles;
-      fontSize: double);
+      fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
       barcodeType: TUnilabelBarcodeFormats; height: double;
-      narrowWidth: integer; wideWidth: integer; showReadable: Boolean);
-    procedure printOrientedBarcode(data: string; x: double; y: double;
-      orientation: Integer; barcodeType: TUnilabelBarcodeFormats;
-      height: double; narrowWidth: integer; wideWidth: integer;
-      showReadable: Boolean);
+      narrowWidth: integer; wideWidth: integer; showReadable: Boolean;
+      spin: integer = 1);
     procedure printImage(path: string; x,y: double);
     procedure printBox(x,y,width,height,topThickness,sideThickness: double);
     function initializePrinter: boolean;
@@ -111,7 +105,7 @@ end;
 procedure TUnilabelPPLA.printBarcode(data: string; x, y: double;
   barcodeType: TUnilabelBarcodeFormats; height: double;
   narrowWidth, wideWidth: integer;
-  showReadable: Boolean);
+  showReadable: Boolean; spin: integer = 1);
 var
   pType: char;
   px, py: integer;
@@ -127,7 +121,7 @@ begin
   if showReadable then
     pType := UpCase(pType);
 
-  A_Prn_Barcode(pX, pY, 1, pType, narrowWidth, wideWidth,
+  A_Prn_Barcode(pX, pY, spin, pType, narrowWidth, wideWidth,
     trunc(height*10), 'N', 0, ansiString(data));
 end;
 
@@ -148,26 +142,13 @@ begin
     DeleteObject(himage);
 end;
 
-procedure TUnilabelPPLA.printOrientedBarcode(data: string; x, y: double;
-   orientation: integer; barcodeType: TUnilabelBarcodeFormats;
-   height: double; narrowWidth, wideWidth: integer; showReadable: Boolean);
-begin
-
-end;
-
-procedure TUnilabelPPLA.printOrientedText(data: string; x, y: double;
-  orientation: integer; fontName: string; fontStyles: TFontStyles;
-  fontSize: double);
-begin
-end;
-
 procedure TUnilabelPPLA.printOut;
 begin
   A_Print_Out(1, 1, 1, 1);
 end;
 
 procedure TUnilabelPPLA.printText(data: string; x, y: double; fontName: string;
-  fontStyles: TFontStyles; fontSize: double);
+  fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
 var
   iBold, iItalic, iUnderline, iStrikeOut: integer;
 begin
@@ -176,9 +157,9 @@ begin
   if fsUnderline in fontStyles then iUnderline := 1 else iUnderline := 0;
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;
   A_Prn_Text_TrueType(trunc(x*10), trunc(y*10),
-    trunc(fontSize), AnsiString(fontName), 1, iBold,
+    trunc(fontSize), AnsiString(fontName), spin, iBold,
     iItalic, iUnderline, iStrikeOut, ansiString(nextInternalVarName),
-    Ansistring(Utf8ToAnsi(data)), 1);
+    Utf8ToAnsi(data), 1);
 
 end;
 

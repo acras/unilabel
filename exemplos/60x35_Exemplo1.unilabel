@@ -2,29 +2,35 @@
   <configuration>
     <columns>3</columns>
     <label-dimension>
-      <height>63</height> 
-      <width>34</width>
+      <height>60</height> 
+      <width>35</width>
     </label-dimension>
     <margin>
-      <left>2</left>
-      <right>2</right>
-      <bottom>2</bottom>
+      <left>0</left>
+      <right>0</right>
+      <bottom>0</bottom>
       <horizontal-gap>0</horizontal-gap>
     </margin>
     <layout>
-      <element type='text' field='description' x='2' y='30' font-name='Verdana' font-size='28'/>
-      <element type='text' field='code' x='2' y='27' font-name='Verdana' font-size='28'/>
-      <element type='barcode' field='barcode' x='2' y='21' />
-      <element type='text' field='description' x='2' y='15' font-name='Verdana' font-size='28'/>
-      <element type='text' field='code' x='2' y='12' font-name='Verdana' font-size='28'/>
-      <element type='barcode' field='barcode' x='2' y='6' />
-      <element type='text' field='price' x='2' y='0' font-name='Verdana' font-size='45'/>
+      <element type='image' value='logo.bmp' x='1' y='46' />
+      <element type='text' value='Trocas somente com esta etiqueta' x='1' y='44' font-name='Verdana' font-size='14'/>
+      <element type='text' value='afixada em no máximo 30 dias' x='1' y='42' font-name='Verdana' font-size='14'/>
+      <element type='text' value='da data da compra' x='1' y='40' font-name='Verdana' font-size='14'/>
+      <element type='text' value='__/__/__' x='10' y='37' font-name='Verdana' font-size='20'/>
+      <element type='text' value='NB,CC' x='30' y='44' font-name='Verdana' font-size='16' orientation='4'/>
+      <element type='text' field='description' x='1' y='30' font-name='Verdana' font-size='28'/>
+      <element type='text' field='code' x='1' y='27' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='1' y='21' />
+      <element type='text' field='description' x='1' y='15' font-name='Verdana' font-size='28'/>
+      <element type='text' field='code' x='1' y='12' font-name='Verdana' font-size='28'/>
+      <element type='barcode' field='barcode' x='1' y='6' />
+      <element type='text' field='price' x='1' y='0' font-name='Verdana' font-size='45'/>
     </layout>
   </configuration>
   <data>
-    <record copies="4" description='Anel de diamantes' code='05987' barcode='05987' price='R$48.918,99'>
-    <record copies="2" description="Le Lis Blanc - Cal�a" code='22578' barcode='22578' price='R$129,90' />
-    <record copies="7" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
+    <record copies="2" description='Anel de diamantes' code='05987' barcode='05987' price='R$48.918,99' />
+    <record copies="1" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
+    <record copies="2" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
     <record copies="1" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
   </data>
 </xml>
