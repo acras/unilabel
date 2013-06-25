@@ -1,0 +1,27 @@
+<xml>
+  <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>21</height> 
+      <width>33</width>
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>2</right>
+      <horizontal-gap>3</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='text' value='ALFAJOR'  x='5.5' y='16' font-name='Verdana' font-size='28'/>
+      <element type='text' value='Ingr.: Biscoito ao leite'  x='0' y='14' font-name='Arial' font-size='22'/>
+      <element type='text' value='Doce de Leite e'  x='7.5' y='12' font-name='Verdana' font-size='22'/>
+      <element type='text' value='Chocolate ao Leite'  x='7.5' y='10' font-name='Verdana' font-size='22'/>
+      <element type='text' value='ou Chocolate Branco'  x='7.5' y='8' font-name='Verdana' font-size='22'/>
+      <element type='text' value='Peso: 30g / Val.: 30 dias '  x='0' y='6' font-name='Verdana' font-size='22'/>
+      <element type='text' value='Facebook: Simin Doces'  x='0' y='4' font-name='Arial' font-size='22'/>
+      <element type='text' value='Obrigada Ricardo pela ajuda'  x='0' y='2' font-name='Arial' font-size='22'/>
+    </layout>
+  </configuration>
+  <data>
+    <record copies="27" />
+  </data>
+</xml>
