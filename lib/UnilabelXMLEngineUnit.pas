@@ -3,7 +3,7 @@ unit UnilabelXMLEngineUnit;
 interface
 
 uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs,
-  MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics;
+  MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics, System.Classes;
 
 type
 
@@ -45,8 +45,13 @@ private
   function parseBarcodeType(value: string): TUnilabelBarcodeFormats;
     procedure addParsedImageElement(p: IUnilabel; layoutNode,
       dataNode: IXMLDOMNode);
-  property xOffset: integer read getXOffset;
-  property yOffset: integer read getYOffset;
+    function getWords(value: string): TStringList;
+    function isSpaceSymbol(sym: string): boolean;
+    procedure parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;
+      var fontName: string; var fontSize: double; var orientation, maxLines,
+      maxCharsPerLine, lineHeight: integer; var value: string; var x, y: double);
+    property xOffset: integer read getXOffset;
+    property yOffset: integer read getYOffset;
 end;
 
 implementation
@@ -191,22 +196,32 @@ begin
     result := bcfCode3of9;
 end;
 
-procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel;
-  layoutNode, dataNode: IXMLDOMNode);
+procedure TUnilabelXMLEngine.parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;
+      var fontName: string;
+      var fontSize: double; var orientation, maxLines,
+      maxCharsPerLine, lineHeight: integer; var value: string; var x, y: double);
 var
-  fs: TFontStyles;
-  fieldName, fontName, value: string;
-  x,y,fontSize: double;
-  orientation: integer;
+  fieldName: string;
 begin
   fontName := 'Verdana';
   fontSize := 23;
-  if layoutNode.attributes.getNamedItem('orientation') <> nil then
-    orientation := StrToInt(layoutNode.attributes.getNamedItem('orientation').nodeValue);
+  orientation := 1;
+  maxLines := 1;
+  maxCharsPerLine := 999;
+  lineHeight := 3;
   if layoutNode.attributes.getNamedItem('font-name') <> nil then
     fontName := layoutNode.attributes.getNamedItem('font-name').nodeValue;
   if layoutNode.attributes.getNamedItem('font-size') <> nil then
     fontSize := StrToFloat(layoutNode.attributes.getNamedItem('font-size').nodeValue, fsUSA);
+  if layoutNode.attributes.getNamedItem('orientation') <> nil then
+    orientation := StrToInt(layoutNode.attributes.getNamedItem('orientation').nodeValue);
+  if layoutNode.attributes.getNamedItem('max-lines') <> nil then
+    maxLines := StrToInt(layoutNode.attributes.getNamedItem('max-lines').nodeValue);
+  if layoutNode.attributes.getNamedItem('max-chars-per-line') <> nil then
+    maxCharsPerLine := StrToInt(layoutNode.attributes.getNamedItem('max-chars-per-line').nodeValue);
+  if layoutNode.attributes.getNamedItem('line-height') <> nil then
+    lineHeight := StrToInt(layoutNode.attributes.getNamedItem('line-height').nodeValue);
+
   fieldName := '';
   if layoutNode.attributes.getNamedItem('field') <> nil then
     fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
@@ -216,10 +231,69 @@ begin
     value := layoutNode.attributes.getNamedItem('value').nodeValue;
   x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
   y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
-  printingObject.printText(value,x,y,fontName,fs,fontSize);
 end;
 
+procedure TUnilabelXMLEngine.addParsedTextElement(p: IUnilabel;
+  layoutNode, dataNode: IXMLDOMNode);
+var
+  fs: TFontStyles;
+  fieldName, fontName, value, line: string;
+  x,y,fontSize: double;
+  maxLines, maxCharsPerLine, orientation: integer;
+  i, lineNum, lineHeight: integer;
+  words: TStringList;
+begin
+  parseTextElementParams(layoutNode, dataNode, fontName, fontSize, orientation,
+    maxLines, maxCharsPerLine, lineHeight, value, x, y);
+  words := getWords(value);
+  lineNum := 1;
+  line := '';
+  for i := 0 to words.count -1 do
+  begin
+    if (length(words[i]) + 1 + length(line)) > maxCharsPerLine then
+    begin
+      printingObject.printText(line,x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+      inc(lineNum);
+      if lineNum > maxLines then exit;
+      line := words[i];
+    end
+    else
+      line := line + words[i] + ' ';
+  end;
+  if line <> '' then
+    printingObject.printText(line,x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+end;
 
+function TUnilabelXMLEngine.getWords(value: string): TStringList;
+var
+  word: string;
+  i, numWords: integer;
+  strl: TStringList;
+begin
+  word := '';
+  strl := TStringList.create;
+  for i := 1 to length(value) do
+  begin
+    if not(isSpaceSymbol(value[i])) then
+      word := word + value[i]
+    else
+    begin
+      strl.add(word);
+      word := '';
+    end;
+  end;
+  if word <> '' then
+  begin
+    strl.add(word);
+    word := '';
+  end;
+  result := strl;
+end;
+
+function TUnilabelXMLEngine.isSpaceSymbol(sym: string): boolean;
+begin
+  result := sym = ' ';
+end;
 
 procedure TUnilabelXMLEngine.generateColumns(node: IXMLDomNode; n: integer = 1);
 var
