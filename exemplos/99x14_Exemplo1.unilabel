@@ -19,9 +19,8 @@
     </layout>
   </configuration>
   <data>
-    <record copies="4" description='Anel de diamantes' code='05987' barcode='05987' price='R$48.918,99'>
-    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
-    <record copies="7" description="Alphorria - Sapato" code='12242' barcode='22345' price='R$114,90' />
-    <record copies="1" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
+    <record copies="4" description='Anel de dreams' code='05987' barcode='05987' price='R$4.918,99' />
+    <record copies="7" description="Anel de platina 18k" code='12242' barcode='22345' price='R$114,90' />
+    <record copies="1" description="Anel de ouro" code='548752' barcode='22547' price='R$321,90' />
   </data>
 </xml>

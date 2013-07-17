@@ -216,7 +216,7 @@ begin
     value := layoutNode.attributes.getNamedItem('value').nodeValue;
   x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
   y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
-  printingObject.printText(value,x,y,fontName,fs,fontSize);
+  printingObject.printText(value,x,y,fontName,fs,fontSize,orientation);
 end;
 
 
