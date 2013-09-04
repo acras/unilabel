@@ -122,7 +122,6 @@ procedure TUnilabelZPL.finishJob;
 var
   cmm: AnsiString;
   i: integer;
-  n: cardinal;
 begin
   Printer.BeginDoc;
   cmm := '';
@@ -130,6 +129,7 @@ begin
     cmm := cmm + commands[i] + #10;
   Escape(Printer.Canvas.Handle, PASSTHROUGH, Length(cmm), PAnsiChar(cmm), nil);
   Clipboard.AsText := cmm;
+  commands.SaveToFile('c:\users\acras\desktop\comms.txt');
   Printer.EndDoc;
 end;
 
