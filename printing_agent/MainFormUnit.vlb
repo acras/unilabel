@@ -1,0 +1,7 @@
+﻿[btnImprimir]
+Coordinates=76,10,79,58
+
+[btnConfiguracoes]
+Coordinates=10,10,56,58
+Visible=True
+

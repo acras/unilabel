@@ -1,0 +1,40 @@
+<xml>
+  <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <width>28</width>
+      <height>15</height> 
+    </label-dimension>
+    <margin>
+      <left>1</left>
+      <right>1</right>
+      <horizontal-gap>3</horizontal-gap>
+    </margin>
+    <layout>
+      <element 
+        type='barcode' field='barcode' 
+        barcode-type='code3of9' 
+        x='1' y='10.1' height='4' 
+        narrow='2' wide='5' 
+      />
+      <element 
+        type='text' field='code' 
+        x='1' y='8' 
+        font-name='Verdana' font-size='28'/>
+      <element 
+        type='text' field='description'  
+        x='1' y='6' 
+        font-name='Verdana' font-size='28'
+        max-chars-per-line='17' max-lines='2' line-height='2'
+      />
+     <element 
+        type='text' field='price' 
+        x='1' y='1' 
+        font-name='Verdana' font-size='42'/>
+    </layout>
+  </configuration>
+  <data>
+    <record copies="2" description="Estopim - Blusa" code='09542' barcode='0LC10' price='R$89,90' />
+    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='0L310' price='R$129,90' />
+  </data>
+</xml>

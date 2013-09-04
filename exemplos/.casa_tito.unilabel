@@ -1,0 +1,53 @@
+<xml>
+    <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <width>28</width>
+      <height>15</height> 
+    </label-dimension>
+    <margin>
+      <left>1</left>
+      <right>1</right>
+      <horizontal-gap>3</horizontal-gap>
+    </margin>
+    <layout>
+      <element 
+        type='barcode' field='barcode' 
+        barcode-type='code3of9' 
+        x='1' y='11' height='4' 
+        narrow='2' wide='5' 
+      />
+      <element 
+        type='text' field='code' 
+        x='1' y='9' 
+        font-name='Verdana' font-size='16'/>
+      <element 
+        type='text' field='description'  
+        x='1' y='7' 
+        font-name='Verdana' font-size='16'
+        max-chars-per-line='17' max-lines='2' line-height='2'
+      />
+     <element 
+        type='text' field='price' 
+        x='1' y='2' 
+        font-name='Verdana' font-size='16'/>
+    </layout>
+  </configuration>
+
+  <data>
+      <record copies="6"
+              description='Térm.Cavalo R.54405 - RA'
+              code='0008H'
+              barcode='0008H'
+              price='R$ 65,90'
+              price_label=''
+              price_3x='3 x R$ 21,97'
+              price_no_symbols=' 65,90'
+              descr_and_price=' 65,90 Térm.Cavalo R.54405 - RA'
+              brand_name='TERMOLAR'
+              description_with_brand='TERMOLAR - Térm.Cavalo R.54405 - RA' 
+              dimension_description=''
+              description_with_dimension_info='Térm.Cavalo R.54405 - RA'
+      />
+  </data>
+</xml>

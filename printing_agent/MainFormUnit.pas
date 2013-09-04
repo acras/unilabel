@@ -5,17 +5,23 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.Win.Registry,
-  shellapi, ShlObj;
+  shellapi, ShlObj, Vcl.Buttons, System.IniFiles;
 
 type
   TForm1 = class(TForm)
     btnImprimir: TButton;
     OpenDialog: TOpenDialog;
+    btnConfiguracoes: TBitBtn;
     procedure btnImprimirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnConfiguracoesClick(Sender: TObject);
   private
+    ini: TIniFile;
+    modeloImpressora: integer;
     procedure printFile(fn: string);
     procedure associateFileType;
+    procedure openConfigs;
+    procedure parseConfigs;
   end;
 
 var
@@ -25,16 +31,20 @@ implementation
 
 {$R *.dfm}
 
-uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit;
+uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit,
+  UnilabelZPLUnit, ConfiguracoesFormUn, unilabelConstantsUnit;
 
 procedure TForm1.printFile(fn: string);
 var
-  ppla: TUnilabelPPLA;
+  prnt: IUnilabel;
   engine: TUnilabelXMLEngine;
   contents: TStringList;
 begin
-  ppla := TUnilabelPPLA.create;
-  engine := TUnilabelXMLEngine.Create(ppla);
+  if modeloImpressora = ARGOX_OS_214_PPLA then
+    prnt := TUnilabelPPLA.create;
+  if modeloImpressora = ZEBRA_TLP_2844 then
+    prnt := TUnilabelZPL.create;
+  engine := TUnilabelXMLEngine.Create(prnt);
   contents := TStringList.Create;
   try
     contents.LoadFromFile(fn);
@@ -42,6 +52,20 @@ begin
   finally
     FreeAndNil(engine);
     FreeAndNil(contents);
+  end;
+end;
+
+procedure TForm1.btnConfiguracoesClick(Sender: TObject);
+var
+  f: TConfiguracoesForm;
+begin
+  f := TConfiguracoesForm.Create(nil);
+  try
+    f.iniFile := ini;
+    f.ShowModal;
+    parseConfigs;
+  finally
+    freeAndNil(f);
   end;
 end;
 
@@ -54,12 +78,27 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  openConfigs;
   if ParamStr(1) <> '' then
   begin
     printFile(ParamStr(1));
     application.Terminate;
   end;
   associateFileType;
+end;
+
+procedure TForm1.openConfigs;
+var
+  iniPath: string;
+begin
+  iniPath := extractFilePath(Application.ExeName) + 'unilabel.ini';
+  ini := TIniFile.Create(iniPath);
+  parseConfigs;
+end;
+
+procedure TForm1.parseConfigs;
+begin
+  modeloImpressora := ini.ReadInteger('Impressora', 'Modelo', 0);
 end;
 
 procedure TForm1.associateFileType;

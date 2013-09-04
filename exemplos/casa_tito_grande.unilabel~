@@ -1,0 +1,325 @@
+<xml>
+    <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>59</height> 
+      <width>34</width>
+    </label-dimension>
+    <margin>
+      <left>0</left>
+      <right>0</right>
+      <bottom>0</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element 
+        type='text' value='Casa Tito Schier' 
+        x='33' y='7' font-size='32' orientation='3'/>
+      <element 
+        type='text' field='brand_name' 
+        x='33' y='11' font-size='16' orientation='3'/>
+      <element 
+        type='text' field='description' 
+        x='33' y='15' font-size='16' orientation='3'
+        max-chars-per-line='20' max-lines='5' line-height='2'/>
+      <element 
+        type='text' field='dimension_description' 
+        x='33' y='19' font-size='16' orientation='3'
+        max-chars-per-line='20' max-lines='5' line-height='2'/>
+      <element type='barcode' field='barcode' x='5' y='28' />
+       <element 
+        type='text' field='code' 
+        x='33' y='38' font-size='16' orientation='3'/>
+       <element type='barcode' field='barcode' x='5' y='44' />
+       <element 
+        type='text' field='code' 
+        x='33' y='49' font-size='16' orientation='3'/>
+        <element 
+        type='text' field='price'
+        x='33' y='53' font-size='32' orientation='3'/>
+
+    </layout>
+  </configuration>
+  <data>
+      <record copies="2"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009J'
+              barcode='0009J'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 40)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 40)'
+      />
+      <record copies="3"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009K'
+              barcode='0009K'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 42)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 42)'
+      />
+      <record copies="3"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009L'
+              barcode='0009L'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 44)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 44)'
+      />
+      <record copies="2"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009M'
+              barcode='0009M'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 46)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 46)'
+      />
+      <record copies="2"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009N'
+              barcode='0009N'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 48)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 48)'
+      />
+      <record copies="2"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009O'
+              barcode='0009O'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(CAQUI, 42)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (CAQUI, 42)'
+      />
+      <record copies="2"
+              description='Bomb. Cotelé Masc. R.339 - AB'
+              code='0009P'
+              barcode='0009P'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(BEGE CLARO, 40)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (BEGE CLARO, 40)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009R'
+              barcode='0009R'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(VERDE ESCURO, 38)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (VERDE ESCURO, 38)'
+      />
+      <record copies="3"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009S'
+              barcode='0009S'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(VERDE ESCURO, 40)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (VERDE ESCURO, 40)'
+      />
+      <record copies="1"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009T'
+              barcode='0009T'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(VERDE ESCURO, 42)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (VERDE ESCURO, 42)'
+      />
+      <record copies="1"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009U'
+              barcode='0009U'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(VERDE ESCURO, 44)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (VERDE ESCURO, 44)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009V'
+              barcode='0009V'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(CAQUI, 38)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (CAQUI, 38)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009W'
+              barcode='0009W'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(CAQUI, 40)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (CAQUI, 40)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009X'
+              barcode='0009X'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(CAQUI, 42)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (CAQUI, 42)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009Y'
+              barcode='0009Y'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(CAQUI, 44)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (CAQUI, 44)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='0009Z'
+              barcode='0009Z'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(CAQUI, 46)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (CAQUI, 46)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='000A0'
+              barcode='000A0'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(MARROM CLARO, 38)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (MARROM CLARO, 38)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='000A1'
+              barcode='000A1'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(MARROM CLARO, 40)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (MARROM CLARO, 40)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='000A2'
+              barcode='000A2'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(MARROM CLARO, 42)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (MARROM CLARO, 42)'
+      />
+      <record copies="2"
+              description='Bomb. Elastano Fem. R.205 - ME'
+              code='000A3'
+              barcode='000A3'
+              price='R$ 115,90'
+              price_label=''
+              price_3x='3 x R$ 38,63'
+              price_no_symbols=' 115,90'
+              descr_and_price=' 115,90 Bomb. Elastano Fem. R.205 - ME'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Elastano Fem. R.205 - ME' 
+              dimension_description='(MARROM CLARO, 44)'
+              description_with_dimension_info='Bomb. Elastano Fem. R.205 - ME (MARROM CLARO, 44)'
+      />
+  </data>
+</xml>

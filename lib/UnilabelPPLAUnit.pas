@@ -2,7 +2,8 @@ unit UnilabelPPLAUnit;
 
 interface
 
-uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils, Windows;
+uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils,
+  Windows, UnilabelTypesUnit;
 
 type
 
@@ -10,6 +11,7 @@ type
 
   public
     constructor create;
+    procedure setConfiguration(configuration: TLabelConfiguration);
     procedure printText(data: string; x: double; y: double; fontName: string;
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
@@ -21,7 +23,10 @@ type
     function initializePrinter: boolean;
     procedure printOut;
     procedure closePrinter;
+    procedure startJob;
+    procedure finishJob;
   protected
+    labelConfiguration: TLabelConfiguration;
     var currentInternalVarIndex: integer;
     function nextInternalVarName: string;
     procedure validateBarcodeParameters(narrowWidth, wideWidth: double);
@@ -46,6 +51,21 @@ end;
 constructor TUnilabelPPLA.create;
 begin
   currentInternalVarIndex := 0;
+end;
+
+procedure TUnilabelPPLA.finishJob;
+begin
+  //nothing to do as it sends page by page
+end;
+
+procedure TUnilabelPPLA.setConfiguration(configuration: TLabelConfiguration);
+begin
+  labelConfiguration := configuration;
+end;
+
+procedure TUnilabelPPLA.startJob;
+begin
+  //nothing to do as it sends page by page
 end;
 
 function TUnilabelPPLA.initializePrinter: boolean;

@@ -1,0 +1,314 @@
+<xml>
+    <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <width>33</width>
+      <height>21</height> 
+    </label-dimension>
+    <margin>
+      <left>4</left>
+      <right>3</right>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='barcode' field='barcode' barcode-type='code3of9' x='0' y='14' height='5' narrow='2' wide='5' />
+       <element
+         type='text' field='code'
+         x='0' y='11.5'
+         font-name='Verdana' font-size='28'/>
+       <element
+         type='text' field='description'
+         x='0' y='9.5'
+         font-name='Verdana' font-size='28'
+         max-chars-per-line='22' max-lines='4' line-height='2'
+       />
+      <element
+         type='text' field='price'
+         x='0' y='1'
+         font-name='Verdana' font-size='42'/>
+    </layout>
+  </configuration>
+
+  <data>
+      <record copies="1"
+              description='Chinelo Couro - EO'
+              code='0008K'
+              barcode='0008K'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 38)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 38)'
+      />
+      <record copies="2"
+              description='Chinelo Couro - EO'
+              code='0008L'
+              barcode='0008L'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 39)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 39)'
+      />
+      <record copies="2"
+              description='Chinelo Couro - EO'
+              code='0008M'
+              barcode='0008M'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 40)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 40)'
+      />
+      <record copies="2"
+              description='Chinelo Couro - EO'
+              code='0008N'
+              barcode='0008N'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 41)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 41)'
+      />
+      <record copies="2"
+              description='Chinelo Couro - EO'
+              code='0008O'
+              barcode='0008O'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 42)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 42)'
+      />
+      <record copies="1"
+              description='Chinelo Couro - EO'
+              code='0008P'
+              barcode='0008P'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 43)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 43)'
+      />
+      <record copies="1"
+              description='Chinelo Couro - EO'
+              code='0008Q'
+              barcode='0008Q'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Couro - EO' 
+              dimension_description='(PRETO, 44)'
+              description_with_dimension_info='Chinelo Couro - EO (PRETO, 44)'
+      />
+      <record copies="2"
+              description='Chinelo Búfalo - EO'
+              code='0008S'
+              barcode='0008S'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 38)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 38)'
+      />
+      <record copies="3"
+              description='Chinelo Búfalo - EO'
+              code='0008T'
+              barcode='0008T'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 39)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 39)'
+      />
+      <record copies="3"
+              description='Chinelo Búfalo - EO'
+              code='0008U'
+              barcode='0008U'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 40)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 40)'
+      />
+      <record copies="3"
+              description='Chinelo Búfalo - EO'
+              code='0008V'
+              barcode='0008V'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 41)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 41)'
+      />
+      <record copies="3"
+              description='Chinelo Búfalo - EO'
+              code='0008W'
+              barcode='0008W'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 42)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 42)'
+      />
+      <record copies="2"
+              description='Chinelo Búfalo - EO'
+              code='0008X'
+              barcode='0008X'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 43)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 43)'
+      />
+      <record copies="2"
+              description='Chinelo Búfalo - EO'
+              code='0008Y'
+              barcode='0008Y'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Chinelo Búfalo - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Chinelo Búfalo - EO' 
+              dimension_description='(CASTOR, 44)'
+              description_with_dimension_info='Chinelo Búfalo - EO (CASTOR, 44)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00090'
+              barcode='00090'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 38)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 38)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00091'
+              barcode='00091'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 39)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 39)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00092'
+              barcode='00092'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 40)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 40)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00093'
+              barcode='00093'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 41)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 41)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00094'
+              barcode='00094'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 42)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 42)'
+      />
+      <record copies="1"
+              description='Alpargata Couro - EO'
+              code='00095'
+              barcode='00095'
+              price='R$ 39,90'
+              price_label=''
+              price_3x='3 x R$ 13,30'
+              price_no_symbols=' 39,90'
+              descr_and_price=' 39,90 Alpargata Couro - EO'
+              brand_name='VUOLLO - sapatilhas'
+              description_with_brand='VUOLLO - sapatilhas - Alpargata Couro - EO' 
+              dimension_description='(PRETO, 43)'
+              description_with_dimension_info='Alpargata Couro - EO (PRETO, 43)'
+      />
+  </data>
+</xml>

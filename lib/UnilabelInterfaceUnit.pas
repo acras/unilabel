@@ -3,11 +3,15 @@ unit UnilabelInterfaceUnit;
 interface
 
 uses
-  Vcl.graphics;
+  Vcl.graphics, UnilabelTypesUnit;
 
 type
   TUnilabelBarcodeFormats = (bcfCode128, bcfCode3of9);
   IUnilabel = Interface
+    //configuration setting
+    procedure setConfiguration(configuration: TLabelConfiguration);
+    procedure startJob;
+    procedure finishJob;
     //Text Elements
     procedure printText(data: string; x,y: double; fontName: string;
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);

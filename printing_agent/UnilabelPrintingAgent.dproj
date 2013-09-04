@@ -5,8 +5,8 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>UnilabelPrintingAgent.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -97,6 +97,19 @@
         <DCCReference Include="..\lib\UnilabelPPLAUnit.pas"/>
         <DCCReference Include="..\lib\libWrappers\PPLADLLWrapper.pas"/>
         <DCCReference Include="..\lib\UnilabelXMLEngineUnit.pas"/>
+        <DCCReference Include="..\lib\UnilabelZPLUnit.pas"/>
+        <DCCReference Include="..\lib\UnilabelTypesUnit.pas"/>
+        <DCCReference Include="F:\repositorio\DLog.pas">
+            <Form>DataLog</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="F:\repositorio\acStrUtils.pas"/>
+        <DCCReference Include="F:\repositorio\acSysUtils.pas"/>
+        <DCCReference Include="ConfiguracoesFormUn.pas">
+            <Form>ConfiguracoesForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unilabelConstantsUnit.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

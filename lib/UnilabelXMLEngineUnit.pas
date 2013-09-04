@@ -3,20 +3,10 @@ unit UnilabelXMLEngineUnit;
 interface
 
 uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs,
-  MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics, System.Classes;
+  MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics, System.Classes,
+  UnilabelTypesUnit;
 
 type
-
-TLabelConfiguration = record
-  width: integer;
-  height: integer;
-  leftMargin: integer;
-  rightMargin: integer;
-  bottomMargin: integer;
-  horizontalGap: integer;
-  columns: integer;
-end;
-
 TUnilabelXMLEngine = class
 public
   constructor Create(pPrintingObject: IUnilabel);
@@ -79,6 +69,7 @@ begin
   xml := CoDOMDocument60.Create;
   xml.loadXML(contents);
   parseConfigurations(xml);
+  printingObject.setConfiguration(labelConfiguration);
   printLabels(xml);
 end;
 
@@ -91,6 +82,7 @@ begin
   labelLayout := xml.selectSingleNode('//configuration//layout');
   currentColumn := 1;
   nodes.reset;
+  printingObject.startJob;
   for i := 0 to nodes.length -1 do
   begin
     n := getCopiesFromLabelNode(nodes[i]);
@@ -119,6 +111,7 @@ begin
   end;
   if currentColumn > 1 then
     printOutLine(1);
+  printingObject.finishJob;
 end;
 
 procedure TUnilabelXMLEngine.printOutLine(n: integer);

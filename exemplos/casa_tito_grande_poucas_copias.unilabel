@@ -1,0 +1,74 @@
+<xml>
+    <configuration>
+    <columns>3</columns>
+    <label-dimension>
+      <height>59</height> 
+      <width>34</width>
+    </label-dimension>
+    <margin>
+      <left>0</left>
+      <right>0</right>
+      <bottom>0</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element 
+        type='text' value='Casa Tito Schier' 
+        x='33' y='7' font-size='32' orientation='3'/>
+      <element 
+        type='text' field='brand_name' 
+        x='33' y='11' font-size='16' orientation='3'/>
+      <element 
+        type='text' field='description' 
+        x='33' y='15' font-size='16' orientation='3'
+        max-chars-per-line='20' max-lines='5' line-height='2'/>
+      <element 
+        type='text' field='dimension_description' 
+        x='33' y='19' font-size='16' orientation='3'
+        max-chars-per-line='20' max-lines='5' line-height='2'/>
+      <element type='barcode' field='barcode' x='5' y='28' />
+       <element 
+        type='text' field='code' 
+        x='33' y='38' font-size='16' orientation='3'/>
+       <element type='barcode' field='barcode' x='5' y='44' />
+       <element 
+        type='text' field='code' 
+        x='33' y='49' font-size='16' orientation='3'/>
+        <element 
+        type='text' field='price'
+        x='33' y='53' font-size='32' orientation='3'/>
+
+    </layout>
+  </configuration>
+  <data>
+      <record copies="6"
+              description='Segundo item seis cópias'
+              code='0009K'
+              barcode='0009K'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 42)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 42)'
+      />
+      <record copies="3"
+              description='Primeiro Item duas cópias'
+              code='0009J'
+              barcode='0009J'
+              price='R$ 108,90'
+              price_label=''
+              price_3x='3 x R$ 36,30'
+              price_no_symbols=' 108,90'
+              descr_and_price=' 108,90 Bomb. Cotelé Masc. R.339 - AB'
+              brand_name='PAMPA SUL'
+              description_with_brand='PAMPA SUL - Bomb. Cotelé Masc. R.339 - AB' 
+              dimension_description='(MARROM CLARO, 40)'
+              description_with_dimension_info='Bomb. Cotelé Masc. R.339 - AB (MARROM CLARO, 40)'
+      />
+
+  </data>
+</xml>

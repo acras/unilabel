@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Impress'#227'o de Etiquetas'
-  ClientHeight = 64
-  ClientWidth = 191
+  ClientHeight = 92
+  ClientWidth = 266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object Form1: TForm1
   object btnImprimir: TButton
     Left = 6
     Top = 8
-    Width = 177
+    Width = 252
     Height = 49
     Caption = 'Imprimir Arquivo'
     Font.Charset = DEFAULT_CHARSET
@@ -28,6 +28,15 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
     OnClick = btnImprimirClick
+  end
+  object btnConfiguracoes: TBitBtn
+    Left = 152
+    Top = 63
+    Width = 106
+    Height = 25
+    Caption = 'Configura'#231#245'es...'
+    TabOrder = 1
+    OnClick = btnConfiguracoesClick
   end
   object OpenDialog: TOpenDialog
     DefaultExt = 'unilabel'
