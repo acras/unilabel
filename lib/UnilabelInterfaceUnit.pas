@@ -10,6 +10,7 @@ type
   IUnilabel = Interface
     //configuration setting
     procedure setConfiguration(configuration: TLabelConfiguration);
+    procedure setPrinterConfigurations(configuration: TPrinterConfiguration);
     procedure startJob;
     procedure finishJob;
     //Text Elements

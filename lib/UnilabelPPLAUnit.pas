@@ -12,6 +12,7 @@ type
   public
     constructor create;
     procedure setConfiguration(configuration: TLabelConfiguration);
+    procedure setPrinterConfigurations(configuration: TPrinterConfiguration);
     procedure printText(data: string; x: double; y: double; fontName: string;
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
@@ -61,6 +62,12 @@ end;
 procedure TUnilabelPPLA.setConfiguration(configuration: TLabelConfiguration);
 begin
   labelConfiguration := configuration;
+end;
+
+procedure TUnilabelPPLA.setPrinterConfigurations(
+  configuration: TPrinterConfiguration);
+begin
+  //nothing to do
 end;
 
 procedure TUnilabelPPLA.startJob;

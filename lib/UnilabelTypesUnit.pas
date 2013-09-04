@@ -14,6 +14,10 @@ type
     columns: integer;
   end;
 
+  TPrinterConfiguration = record
+    name: string;
+  end;
+
 implementation
 
 end.

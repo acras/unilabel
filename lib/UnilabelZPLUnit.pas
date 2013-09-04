@@ -14,6 +14,7 @@ type
   public
     constructor create;
     procedure setConfiguration(configuration: TLabelConfiguration);
+    procedure setPrinterConfigurations(configuration: TPrinterConfiguration);
     procedure printText(data: string; x: double; y: double; fontName: string;
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
@@ -31,7 +32,7 @@ type
     commands: TStringList;
     widthParam: string;
     labelConfiguration: TLabelConfiguration;
-    p: TPrinter;
+    printerConfiguration: TPrinterConfiguration;
     function translateOrientation(orientation: integer): integer;
   end;
 
@@ -44,6 +45,12 @@ uses DLog;
 procedure TUnilabelZPL.setConfiguration(configuration: TLabelConfiguration);
 begin
   labelConfiguration := configuration;
+end;
+
+procedure TUnilabelZPL.setPrinterConfigurations(
+  configuration: TPrinterConfiguration);
+begin
+  printerConfiguration := configuration;
 end;
 
 procedure TUnilabelZPL.addConfigurationCommands;
@@ -120,9 +127,13 @@ end;
 
 procedure TUnilabelZPL.finishJob;
 var
-  cmm: AnsiString;
+  cmm, printerName: AnsiString;
   i: integer;
+  deviceMode: NativeUint;
 begin
+  printerName := printerConfiguration.name;
+  if printerName <> '' then
+    Printer.PrinterIndex := Printer.Printers.IndexOf(printerName);
   Printer.BeginDoc;
   cmm := '00'; // reserve space for the initial `word`
   for i := 0 to commands.Count-1 do

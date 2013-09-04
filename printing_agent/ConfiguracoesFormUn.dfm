@@ -11,6 +11,7 @@ object ConfiguracoesForm: TConfiguracoesForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -39,6 +40,13 @@ object ConfiguracoesForm: TConfiguracoesForm
     Font.Style = []
     ParentFont = False
   end
+  object Label3: TLabel
+    Left = 248
+    Top = 84
+    Width = 12
+    Height = 13
+    Caption = 'ou'
+  end
   object cboModelo: TComboBox
     Left = 100
     Top = 8
@@ -56,7 +64,7 @@ object ConfiguracoesForm: TConfiguracoesForm
       'Argox OS 214 (PPLA)'
       'Zebra TLP-2844')
   end
-  object ComboBox1: TComboBox
+  object cboPrinters: TComboBox
     Left = 100
     Top = 41
     Width = 239
@@ -83,11 +91,18 @@ object ConfiguracoesForm: TConfiguracoesForm
     OnClick = btnSalvarClick
   end
   object LinkLabel1: TLinkLabel
-    Left = 194
-    Top = 74
+    Left = 204
+    Top = 84
     Width = 46
     Height = 17
     Caption = 'Cancelar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
+    OnClick = LinkLabel1Click
   end
 end

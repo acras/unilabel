@@ -32,18 +32,23 @@ implementation
 {$R *.dfm}
 
 uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit,
-  UnilabelZPLUnit, ConfiguracoesFormUn, unilabelConstantsUnit;
+  UnilabelZPLUnit, ConfiguracoesFormUn, unilabelConstantsUnit,
+  UnilabelTypesUnit;
 
 procedure TForm1.printFile(fn: string);
 var
   prnt: IUnilabel;
   engine: TUnilabelXMLEngine;
+  printerConfiguration: TPrinterConfiguration;
   contents: TStringList;
 begin
   if modeloImpressora = ARGOX_OS_214_PPLA then
     prnt := TUnilabelPPLA.create;
   if modeloImpressora = ZEBRA_TLP_2844 then
     prnt := TUnilabelZPL.create;
+
+  printerConfiguration.name := ini.ReadString('printer','name','');
+  prnt.setPrinterConfigurations(printerConfiguration);
   engine := TUnilabelXMLEngine.Create(prnt);
   contents := TStringList.Create;
   try
