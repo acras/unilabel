@@ -2,8 +2,8 @@
     <configuration>
     <columns>3</columns>
     <label-dimension>
-      <height>59</height> 
-      <width>34</width>
+      <height>60</height> 
+      <width>35</width>
     </label-dimension>
     <margin>
       <left>0</left>

@@ -2,30 +2,35 @@
     <configuration>
     <columns>3</columns>
     <label-dimension>
-      <width>33</width>
-      <height>21</height> 
+      <width>28</width>
+      <height>15</height> 
     </label-dimension>
     <margin>
-      <left>2</left>
-      <right>3</right>
+      <left>1</left>
+      <right>1</right>
       <horizontal-gap>3</horizontal-gap>
     </margin>
     <layout>
-      <element type='barcode' field='barcode' barcode-type='code3of9' x='0' y='14' height='5' narrow='2' wide='5' />
-       <element
-         type='text' field='code'
-         x='0' y='11.5'
-         font-name='Verdana' font-size='12'/>
-       <element
-         type='text' field='description'
-         x='0' y='9.5'
-         font-name='Verdana' font-size='12'
-         max-chars-per-line='22' max-lines='4' line-height='2'
-       />
-      <element
-         type='text' field='price'
-         x='0' y='1'
-         font-name='Verdana' font-size='18'/>
+      <element 
+        type='barcode' field='barcode' 
+        barcode-type='code3of9' 
+        x='1' y='11' height='4' 
+        narrow='2' wide='5' 
+      />
+      <element 
+        type='text' field='code' 
+        x='1' y='9' 
+        font-name='Verdana' font-size='16'/>
+      <element 
+        type='text' field='description'  
+        x='1' y='7' 
+        font-name='Verdana' font-size='16'
+        max-chars-per-line='17' max-lines='2' line-height='2'
+      />
+     <element 
+        type='text' field='price' 
+        x='1' y='2' 
+        font-name='Verdana' font-size='16'/>
     </layout>
   </configuration>
 

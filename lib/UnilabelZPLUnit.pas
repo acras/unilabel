@@ -124,12 +124,12 @@ var
   i: integer;
 begin
   Printer.BeginDoc;
-  cmm := '';
+  cmm := '00'; // reserve space for the initial `word`
   for i := 0 to commands.Count-1 do
     cmm := cmm + commands[i] + #10;
-  Escape(Printer.Canvas.Handle, PASSTHROUGH, Length(cmm), PAnsiChar(cmm), nil);
-  Clipboard.AsText := cmm;
-  commands.SaveToFile('c:\users\acras\desktop\comms.txt');
+  pword(cmm)^ := length(cmm)-2; // store the length
+  if ExtEscape(Printer.Canvas.Handle, PASSTHROUGH, Length(cmm), pointer(cmm), 0, nil)<0 then
+    raise Exception.Create('Error at printing to printer');
   Printer.EndDoc;
 end;
 
