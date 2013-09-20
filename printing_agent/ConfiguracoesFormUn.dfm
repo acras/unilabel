@@ -62,7 +62,8 @@ object ConfiguracoesForm: TConfiguracoesForm
     Text = 'cboModelo'
     Items.Strings = (
       'Argox OS 214 (PPLA)'
-      'Zebra TLP-2844')
+      'Zebra TLP-2844'
+      'Argox PPLA (Via Driver)')
   end
   object cboPrinters: TComboBox
     Left = 100
@@ -76,7 +77,7 @@ object ConfiguracoesForm: TConfiguracoesForm
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    Text = 'cboModelo'
+    Text = 'cboPrinters'
     Items.Strings = (
       'Argox OS 214 (PPLA)'
       'Zebra TLP-2844')

@@ -3,15 +3,24 @@ unit UnilabelPPLAUnit;
 interface
 
 uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils,
-  Windows, UnilabelTypesUnit;
+  Windows, UnilabelTypesUnit, Vcl.Dialogs, Winapi.shellAPI, Forms;
 
 type
 
+  TArgoxCommunicationMode = (tacmUndefined, tacmUSB, tacmDriver);
   TUnilabelPPLA = class(TInterfacedObject, IUnilabel)
-
-  public
+  private
+    communicationMode: TArgoxCommunicationMode;
+    printerConfiguration: TPrinterConfiguration;
+    function parseCommunicationMode(value: String): TArgoxCommunicationMode;
+    function initializeDriver: boolean;
+    function initializeUSB: boolean;
+    function getPrintingTempFileName: string;
+    procedure sendPrintFileToDriver;
+public
     constructor create;
     procedure setConfiguration(configuration: TLabelConfiguration);
+    procedure setSpecificConfiguration(name, value: String);
     procedure setPrinterConfigurations(configuration: TPrinterConfiguration);
     procedure printText(data: string; x: double; y: double; fontName: string;
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
@@ -28,6 +37,7 @@ type
     procedure finishJob;
   protected
     labelConfiguration: TLabelConfiguration;
+    tempFileName: String;
     var currentInternalVarIndex: integer;
     function nextInternalVarName: string;
     procedure validateBarcodeParameters(narrowWidth, wideWidth: double);
@@ -37,7 +47,7 @@ implementation
 
 { TUnilabelPPLA }
 
-uses PPLADLLWrapper;
+uses PPLADLLWrapper, acSysUtils;
 
 var dpCrLf: AnsiString = chr(13)+chr(10);
 var sznop1: AnsiString = 'nop_front' + Chr(13) + chr(10);
@@ -57,6 +67,15 @@ end;
 procedure TUnilabelPPLA.finishJob;
 begin
   //nothing to do as it sends page by page
+  if communicationMode = tacmDriver then
+    sendPrintFileToDriver;
+end;
+
+procedure TUnilabelPPLA.sendPrintFileToDriver;
+begin
+  shellexecute(application.Handle, 'open', 'ssdal',
+    PWideChar('/p "' + printerConfiguration.name  + '" send ' + tempFileName),
+    nil, SW_HIDE);
 end;
 
 procedure TUnilabelPPLA.setConfiguration(configuration: TLabelConfiguration);
@@ -67,7 +86,23 @@ end;
 procedure TUnilabelPPLA.setPrinterConfigurations(
   configuration: TPrinterConfiguration);
 begin
-  //nothing to do
+  printerConfiguration := configuration;
+end;
+
+procedure TUnilabelPPLA.setSpecificConfiguration(name, value: String);
+begin
+  if UpperCase(name) = 'COMMUNICATION' then
+    communicationMode := parseCommunicationMode(value);
+end;
+
+function TUnilabelPPLA.parseCommunicationMode(
+  value: String): TArgoxCommunicationMode;
+begin
+  result := tacmUndefined;
+  if UpperCase(value) = 'USB' then
+    result := tacmUSB;
+  if UpperCase(value) = 'DRIVER' then
+    result := tacmDriver;
 end;
 
 procedure TUnilabelPPLA.startJob;
@@ -76,6 +111,30 @@ begin
 end;
 
 function TUnilabelPPLA.initializePrinter: boolean;
+begin
+  result := false;
+  if communicationMode = tacmUSB then
+    result := initializeUSB
+  else if communicationMode = tacmDriver then
+    result := initializeDriver
+  else
+    raise Exception.Create('Nenhum método de comunicação definido para Argox');
+  if result then
+  begin
+    A_Set_Unit('m');
+    A_Set_Syssetting(1, 0, 0, 0, 0);
+    A_Del_Graphic(1, '*');
+    A_Clear_Memory();
+  end;
+end;
+
+function TUnilabelPPLA.initializeDriver: boolean;
+begin
+  tempFileName := getPrintingTempFileName;
+  result := A_CreatePrn(0, tempFileName) = 0;
+end;
+
+function TUnilabelPPLA.initializeUSB: boolean;
 var
   nLen, len1, len2: integer;
   ret,sw : integer;
@@ -108,19 +167,9 @@ begin
       'Não foi possível localizar a impressora.' + #13#10 +
       'Certifique-se de que ela está conectada ao computador,' + #13#10 +
       'ligada e com os dois leds frontais acesos.');
-    //TDirectory.CreateDirectory(szSavePath);
-    //ret := A_CreatePrn(0, szSaveFile);
   end;
 
   result := ret <= 0;
-
-  if result then
-  begin
-    A_Set_Unit('m');
-    A_Set_Syssetting(1, 0, 0, 0, 0);
-    A_Del_Graphic(1, '*');
-    A_Clear_Memory();
-  end;
 end;
 
 function TUnilabelPPLA.nextInternalVarName: string;
@@ -198,6 +247,11 @@ begin
   if (wideWidth > 24) or (wideWidth < 0) then
     raise Exception.Create('Invalid narrow width value. Must be between 0 and 24');
 
+end;
+
+function TUnilabelPPLA.getPrintingTempFileName: string;
+begin
+  result := getWindowsTempFileName('argoxPrint') + '.prn';
 end;
 
 end.

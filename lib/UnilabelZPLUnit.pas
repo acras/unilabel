@@ -5,7 +5,6 @@ uses UnilabelInterfaceUnit, vcl.Graphics, System.IOUtils, System.SysUtils, Windo
   Vcl.StdCtrls, Vcl.Printers, classes, UnilabelTypesUnit,
   Winapi.winSpool, Vcl.Dialogs, vcl.clipbrd;
 type
-
   TUnilabelZPL = class(TInterfacedObject, IUnilabel)
   private
     function translatePositionParameter(p: double): string;
@@ -13,6 +12,7 @@ type
     procedure addConfigurationCommands;
   public
     constructor create;
+    procedure setSpecificConfiguration(name, value: String);
     procedure setConfiguration(configuration: TLabelConfiguration);
     procedure setPrinterConfigurations(configuration: TPrinterConfiguration);
     procedure printText(data: string; x: double; y: double; fontName: string;
@@ -51,6 +51,11 @@ procedure TUnilabelZPL.setPrinterConfigurations(
   configuration: TPrinterConfiguration);
 begin
   printerConfiguration := configuration;
+end;
+
+procedure TUnilabelZPL.setSpecificConfiguration(name, value: String);
+begin
+  //nones
 end;
 
 procedure TUnilabelZPL.addConfigurationCommands;

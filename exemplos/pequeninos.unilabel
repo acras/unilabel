@@ -1,0 +1,156 @@
+<xml>
+  <configuration> 
+  <columns>3</columns> 
+  <label-dimension> 
+    <width>35</width> 
+    <height>60</height> 
+  </label-dimension> 
+  <margin> 
+    <left>2</left> 
+    <right>0</right> 
+    <bottom>0</bottom> 
+    <horizontal-gap>0</horizontal-gap> 
+  </margin> 
+  <layout> 
+    <element type='text' value='Pequeninos' x='0' y='48' font-size='48'/> 
+    <element type='text' field='brand_name' x='0' y='45' font-size='24'/> 
+    <element type='text' field='description_with_dimension_info' x='0' y='42' font-size='24' max-lines="3" max-chars-per-line="20" /> 
+    <element type='text' field='code' x='0' y='30' font-size='24'/> 
+    <element type='barcode' field='barcode' x='0' y='23' height='7' narrow='2' wide='5' /> 
+    <element type='text' value='Troca até __/__/____' x='0' y='20' font-size='24'/> 
+
+    <element type='barcode' field='barcode' x='0' y='11' height='6' narrow='2' wide='5' /> 
+    <element type='text' field='code' x='0' y='8' font-name='Verdana' font-size='22'/> 
+    <element type='text' field='description_with_dimension_info' x='0' y='6' font-size='18' max-lines="2" max-chars-per-line="20" /> 
+    <element type='text' field='price' x='0' y='0' font-name='Verdana' font-size='42' orientation='1'/> 
+  </layout> 
+</configuration>
+  <data>
+      <record copies="1"
+              description='SAPATILHA'
+              code='00004'
+              barcode='00004'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(28)'
+              description_with_dimension_info='SAPATILHA (28)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='00005'
+              barcode='00005'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(29)'
+              description_with_dimension_info='SAPATILHA (29)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='00006'
+              barcode='00006'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(30)'
+              description_with_dimension_info='SAPATILHA (30)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='00007'
+              barcode='00007'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(31)'
+              description_with_dimension_info='SAPATILHA (31)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='00008'
+              barcode='00008'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(32)'
+              description_with_dimension_info='SAPATILHA (32)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='00009'
+              barcode='00009'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(33)'
+              description_with_dimension_info='SAPATILHA (33)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='0000A'
+              barcode='0000A'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(34)'
+              description_with_dimension_info='SAPATILHA (34)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='0000B'
+              barcode='0000B'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(35)'
+              description_with_dimension_info='SAPATILHA (35)'
+      />
+      <record copies="1"
+              description='SAPATILHA'
+              code='0000C'
+              barcode='0000C'
+              price='R$ 113,90'
+              price_label=''
+              price_3x='3 x R$ 37,97'
+              price_no_symbols=' 113,90'
+              descr_and_price=' 113,90 SAPATILHA'
+              brand_name='MARISOL '
+              description_with_brand='MARISOL  - SAPATILHA' 
+              dimension_description='(36)'
+              description_with_dimension_info='SAPATILHA (36)'
+      />
+  </data>
+</xml>

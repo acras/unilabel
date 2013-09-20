@@ -22,6 +22,7 @@ type
   private
     FIniFile: TIniFile;
     procedure setIniFile(const Value: TIniFile);
+    procedure handleVisual;
   public
     property iniFile: TIniFile write setIniFile;
   end;
@@ -47,6 +48,11 @@ procedure TConfiguracoesForm.FormCreate(Sender: TObject);
 begin
   cboPrinters.Text := '';
   cboPrinters.Items.Assign(Printer.Printers);
+end;
+
+procedure TConfiguracoesForm.handleVisual;
+begin
+  cboPrinters.Enabled := cboModelo.ItemIndex in [1,2];
 end;
 
 procedure TConfiguracoesForm.LinkLabel1Click(Sender: TObject);

@@ -1,0 +1,30 @@
+<xml>
+  <configuration>
+    <columns>1</columns>
+    <label-dimension>
+      <width>80</width>
+      <height>25</height> 
+    </label-dimension>
+    <margin>
+      <left>3</left>
+      <right>3</right>
+      <bottom>0</bottom>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='text' value='DESTINATÁRIO' x='2' y='21' font-name='Verdana' font-size='28'/>
+      <element type='text' field='name' x='2' y='17' font-name='Verdana' font-size='36'/>
+      <element type='text' field='endereco1' x='2' y='14' font-name='Verdana' font-size='28'/>
+      <element type='text' field='endereco2' x='2' y='10' font-name='Verdana' font-size='28'/>
+      <element type='text' field='endereco3' x='2' y='6' font-name='Verdana' font-size='28' align='right'/>
+      <element type='text' field='endereco4' x='2' y='2' font-name='Verdana' font-size='28' align='right'/>
+    </layout>
+  </configuration>
+  <data>
+    <record copies="1" name='CodTec Sistemas' 
+      endereco1='Avenida Firmino Alves, nº 60'
+      endereco2='12º Andar - Ed. Modulo Center'
+      endereco3='Centro, Itabuna - Bahia'
+      endereco4='CEP 45600-185' />
+  </data>
+</xml>

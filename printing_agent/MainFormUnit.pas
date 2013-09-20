@@ -12,6 +12,7 @@ type
     btnImprimir: TButton;
     OpenDialog: TOpenDialog;
     btnConfiguracoes: TBitBtn;
+    Label1: TLabel;
     procedure btnImprimirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnConfiguracoesClick(Sender: TObject);
@@ -43,9 +44,17 @@ var
   contents: TStringList;
 begin
   if modeloImpressora = ARGOX_OS_214_PPLA then
+  begin
     prnt := TUnilabelPPLA.create;
+    prnt.setSpecificConfiguration('communication', 'usb');
+  end;
   if modeloImpressora = ZEBRA_TLP_2844 then
     prnt := TUnilabelZPL.create;
+  if modeloImpressora = ARGOX_PPLA_DRIVER then
+  begin
+    prnt := TUnilabelPPLA.create;
+    prnt.setSpecificConfiguration('communication', 'driver');
+  end;
 
   printerConfiguration.name := ini.ReadString('printer','name','');
   prnt.setPrinterConfigurations(printerConfiguration);
@@ -103,7 +112,7 @@ end;
 
 procedure TForm1.parseConfigs;
 begin
-  modeloImpressora := ini.ReadInteger('Impressora', 'Modelo', 0);
+  modeloImpressora := ini.ReadInteger('Printer', 'Model', 0);
 end;
 
 procedure TForm1.associateFileType;
