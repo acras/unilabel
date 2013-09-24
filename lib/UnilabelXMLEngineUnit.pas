@@ -38,7 +38,9 @@ private
     function getWords(value: string): TStringList;
     function isSpaceSymbol(sym: string): boolean;
     procedure parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;
-      var fontName: string; var fontSize: double; var orientation, maxLines,
+      var fontName: string; var fontSize: double;
+      var fontStyles: TFontStyles;
+      var orientation, maxLines,
       maxCharsPerLine, lineHeight: integer; var value: string; var x, y: double);
     property xOffset: integer read getXOffset;
     property yOffset: integer read getYOffset;
@@ -191,8 +193,10 @@ end;
 
 procedure TUnilabelXMLEngine.parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;
       var fontName: string;
-      var fontSize: double; var orientation, maxLines,
-      maxCharsPerLine, lineHeight: integer; var value: string; var x, y: double);
+      var fontSize: double;
+      var fontStyles: TFontStyles;
+      var orientation, maxLines, maxCharsPerLine, lineHeight: integer;
+      var value: string; var x, y: double);
 var
   fieldName: string;
 begin
@@ -214,6 +218,10 @@ begin
     maxCharsPerLine := StrToInt(layoutNode.attributes.getNamedItem('max-chars-per-line').nodeValue);
   if layoutNode.attributes.getNamedItem('line-height') <> nil then
     lineHeight := StrToInt(layoutNode.attributes.getNamedItem('line-height').nodeValue);
+  fontStyles := [];
+  if layoutNode.attributes.getNamedItem('bold') <> nil then
+    if upperCase(layoutNode.attributes.getNamedItem('bold').nodeValue) = 'TRUE' then
+      fontStyles := fontStyles + [fsBold];
 
   fieldName := '';
   if layoutNode.attributes.getNamedItem('field') <> nil then
@@ -236,7 +244,7 @@ var
   i, lineNum, lineHeight: integer;
   words: TStringList;
 begin
-  parseTextElementParams(layoutNode, dataNode, fontName, fontSize, orientation,
+  parseTextElementParams(layoutNode, dataNode, fontName, fontSize, fs, orientation,
     maxLines, maxCharsPerLine, lineHeight, value, x, y);
   words := getWords(value);
   lineNum := 1;

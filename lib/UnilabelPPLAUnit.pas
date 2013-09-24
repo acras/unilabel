@@ -125,6 +125,7 @@ begin
     A_Set_Syssetting(1, 0, 0, 0, 0);
     A_Del_Graphic(1, '*');
     A_Clear_Memory();
+    A_Set_Darkness(12);
   end;
 end;
 
