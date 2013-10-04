@@ -1,6 +1,8 @@
 Unilabel
 ========
 
+```Propósito
+
 Uma dor histórica, recorrente e que gera muito trabalho é a emissão de etiquetas.
 Históricamente enviávamos a impressão pelo PDV através do Report Builder. Isso sempre deu problema mas não tinha muito o que fazer pois a maior parte das pessoas usava impressora comum (laser e jato) para imprimir as etiquetas.
 
