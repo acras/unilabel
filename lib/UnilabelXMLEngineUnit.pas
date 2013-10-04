@@ -4,7 +4,7 @@ interface
 
 uses UnilabelInterfaceUnit, Xml.XMLDoc, Xml.Xmldom, Xml.Xmlintf,Vcl.Dialogs,
   MSXML2_TLB, ComObj, System.SysUtils, Vcl.Graphics, System.Classes,
-  UnilabelTypesUnit;
+  UnilabelTypesUnit, vcl.forms;
 
 type
 TUnilabelXMLEngine = class
@@ -147,7 +147,7 @@ var
   x, y: Double;
 begin
   value := layoutNode.attributes.getNamedItem('value').nodeValue;
-  path := 'images\' + value;
+  path := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'images\' + value;
   x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
   y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
   printingObject.printImage(path,x,y);
@@ -253,7 +253,10 @@ begin
   begin
     if (length(words[i]) + 1 + length(line)) > maxCharsPerLine then
     begin
-      printingObject.printText(line,x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+      if orientation = 3 then
+        printingObject.printText(trim(line),x,y+(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation)
+      else
+        printingObject.printText(trim(line),x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
       inc(lineNum);
       if lineNum > maxLines then exit;
       line := words[i];
@@ -262,7 +265,12 @@ begin
       line := line + words[i] + ' ';
   end;
   if line <> '' then
-    printingObject.printText(line,x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+  begin
+    if orientation = 3 then
+      printingObject.printText(trim(line),x,y+(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation)
+    else
+      printingObject.printText(trim(line),x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+  end;
 end;
 
 function TUnilabelXMLEngine.getWords(value: string): TStringList;

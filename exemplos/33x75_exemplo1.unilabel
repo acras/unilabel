@@ -1,0 +1,32 @@
+<xml>
+<configuration> 
+  <columns>3</columns> 
+  <label-dimension> 
+    <width>33</width> 
+    <height>75</height> 
+  </label-dimension> 
+  <margin> 
+    <left>0</left> 
+    <right>0</right> 
+    <bottom>0</bottom> 
+    <horizontal-gap>0</horizontal-gap> 
+  </margin> 
+  <layout> 
+    <element type='image' value='logo.bmp' x='5' y='43'/> 
+    <element type='text' field='brand_name' x='0' y='45' font-size='24'/> 
+    <element type='text' field='description_with_dimension_info' x='0' y='42' font-size='24' max-lines="3" max-chars-per-line="20" /> 
+    <element type='text' field='main_product_code' x='0' y='30' font-size='24'/> 
+    <element type='barcode' field='barcode' x='0' y='23' height='7' narrow='2' wide='5' /> 
+    <element type='text' value='Troca até __/__/____' x='0' y='20' font-size='24'/> 
+
+    <element type='barcode' field='barcode' x='0' y='11' height='6' narrow='2' wide='5' /> 
+    <element type='text' field='main_product_code' x='0' y='8' font-name='Verdana' font-size='22'/> 
+    <element type='text' field='description_with_dimension_info' x='0' y='6' font-size='18' max-lines="2" max-chars-per-line="20" /> 
+    <element type='text' field='price' x='0' y='0' font-name='Verdana' font-size='42' orientation='1'/> 
+  </layout> 
+</configuration>
+  <data>
+    <record copies="2" description="Le Lis Blanc - Calça" code='22578' barcode='22578' price='R$129,90' />
+    <record copies="2" description="Estopim - Short" code='548752' barcode='22547' price='R$321,90' />
+  </data>
+</xml>

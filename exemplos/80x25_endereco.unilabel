@@ -21,10 +21,10 @@
     </layout>
   </configuration>
   <data>
-    <record copies="1" name='CodTec Sistemas' 
-      endereco1='Avenida Firmino Alves, nº 60'
-      endereco2='12º Andar - Ed. Modulo Center'
-      endereco3='Centro, Itabuna - Bahia'
-      endereco4='CEP 45600-185' />
+    <record copies="1" name='TV Solução (A/C Luis)' 
+      endereco1='Rua Tupi, 426'
+      endereco2=''
+      endereco3='Araraquara - SP'
+      endereco4='CEP 14.802-280' />
   </data>
 </xml>
