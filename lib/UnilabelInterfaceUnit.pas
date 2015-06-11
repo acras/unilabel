@@ -6,7 +6,7 @@ uses
   Vcl.graphics, UnilabelTypesUnit;
 
 type
-  TUnilabelBarcodeFormats = (bcfCode128, bcfCode3of9);
+  TUnilabelBarcodeFormats = (bcfCode128, bcfCode3of9, bcfEAN13);
   IUnilabel = Interface
     //configuration setting
     procedure setConfiguration(configuration: TLabelConfiguration);

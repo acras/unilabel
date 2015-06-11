@@ -195,6 +195,12 @@ begin
     pType := 'e';
   if barcodeType = bcfCode3of9 then
     pType := 'a';
+  if barcodeType = bcfEAN13 then
+  begin
+    pType := 'f';
+    if Length(data) = 13 then
+      data := copy(data, 1, 12);
+  end;
   if showReadable then
     pType := UpCase(pType);
 

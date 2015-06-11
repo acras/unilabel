@@ -12,7 +12,7 @@
       <horizontal-gap>0</horizontal-gap>
     </margin>
     <layout>
-      <element type='text' value='DESTINATÁRIO' x='2' y='21' font-name='Verdana' font-size='28'/>
+      <element type='text' value='REMETENTE' x='2' y='21' font-name='Verdana' font-size='28'/>
       <element type='text' field='name' x='2' y='17' font-name='Verdana' font-size='36'/>
       <element type='text' field='endereco1' x='2' y='14' font-name='Verdana' font-size='28'/>
       <element type='text' field='endereco2' x='2' y='10' font-name='Verdana' font-size='28'/>
@@ -21,10 +21,10 @@
     </layout>
   </configuration>
   <data>
-    <record copies="1" name='TV Solução (A/C Luis)' 
-      endereco1='Rua Tupi, 426'
-      endereco2=''
-      endereco3='Araraquara - SP'
-      endereco4='CEP 14.802-280' />
+    <record copies="6" name='Acras Sistemas' 
+      endereco1='Rua Sete de Abril, 854'
+      endereco2='a/304'
+      endereco3='Curitiba - PR'
+      endereco4='CEP 80.045-165' />
   </data>
 </xml>

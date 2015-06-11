@@ -189,6 +189,8 @@ begin
     result := bcfCode128; //redundant for the sake of readability
   if UpperCase(value) = 'CODE3OF9' then
     result := bcfCode3of9;
+  if UpperCase(value) = 'EAN13' then
+    result := bcfEAN13;
 end;
 
 procedure TUnilabelXMLEngine.parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;

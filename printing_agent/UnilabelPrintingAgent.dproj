@@ -1,12 +1,12 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{9C7F58F7-7869-4B54-906E-E9641C565727}</ProjectGuid>
-        <ProjectVersion>14.3</ProjectVersion>
+        <ProjectVersion>14.6</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>UnilabelPrintingAgent.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -99,12 +99,12 @@
         <DCCReference Include="..\lib\UnilabelXMLEngineUnit.pas"/>
         <DCCReference Include="..\lib\UnilabelZPLUnit.pas"/>
         <DCCReference Include="..\lib\UnilabelTypesUnit.pas"/>
-        <DCCReference Include="F:\repositorio\DLog.pas">
+        <DCCReference Include="P:\repositorio\DLog.pas">
             <Form>DataLog</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="F:\repositorio\acStrUtils.pas"/>
-        <DCCReference Include="F:\repositorio\acSysUtils.pas"/>
+        <DCCReference Include="P:\repositorio\acStrUtils.pas"/>
+        <DCCReference Include="P:\repositorio\acSysUtils.pas"/>
         <DCCReference Include="ConfiguracoesFormUn.pas">
             <Form>ConfiguracoesForm</Form>
             <FormType>dfm</FormType>

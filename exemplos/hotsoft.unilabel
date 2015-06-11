@@ -1,0 +1,30 @@
+<xml>
+  <configuration>
+    <columns>1</columns>
+    <label-dimension>
+      <width>50</width>
+      <height>30</height> 
+    </label-dimension>
+    <margin>
+      <left>2</left>
+      <right>2</right>
+      <horizontal-gap>0</horizontal-gap>
+    </margin>
+    <layout>
+      <element type='text' field='cod1' x='0.5' y='28' font-name='Verdana' font-size='8'/>
+      <element type='text' field='cod2' x='40' y='28' font-name='Arial' font-size='8'/>
+      <element type='text' field='bancada' x='0.5' y='25' font-name='Arial' font-size='18'/>
+      <element type='text' field='exame' x='0.5' y='21' font-name='Arial' font-size='38'/>
+      <element type='barcode' field='barcode' x='1.5' y='13' barcode-type='code3of9' height='7' narrow='2' wide='4' />
+      <element type='text' field='material' x='0.5' y='11' font-name='Arial' font-size='14'/>
+      <element type='text' field='codigos' x='0.5' y='9' font-name='Arial' font-size='6' max-lines='2' max-chars-per-line="20"/>
+      <element type='text' field='data' x='0.5' y='5' font-name='Arial' font-size='8' />
+      <element type='text' field='lab' x='0.5' y='3' font-name='Arial' font-size='8' />
+    </layout>
+  </configuration>
+  <data>
+    <record copies="2" cod1="A13" cod2="41301" bancada="BIOQUIMICA" exame="GLICO, HEMOG" barcode="100000129"
+            material="Sangue(Heparina)" codigos="125vd 17alf 17og 17otr dhtr urina zinco" 
+            data="08/10/2013 16:33" lab="LAB. PRÓ ANÁLISE"/>
+  </data>
+</xml>

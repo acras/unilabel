@@ -9,9 +9,9 @@ uses
   UnilabelXMLEngineUnit in '..\lib\UnilabelXMLEngineUnit.pas',
   UnilabelZPLUnit in '..\lib\UnilabelZPLUnit.pas',
   UnilabelTypesUnit in '..\lib\UnilabelTypesUnit.pas',
-  DLog in 'F:\repositorio\DLog.pas' {DataLog: TDataModule},
-  acStrUtils in 'F:\repositorio\acStrUtils.pas',
-  acSysUtils in 'F:\repositorio\acSysUtils.pas',
+  DLog in '..\..\repositorio\DLog.pas' {DataLog: TDataModule},
+  acStrUtils in '..\..\repositorio\acStrUtils.pas',
+  acSysUtils in '..\..\repositorio\acSysUtils.pas',
   ConfiguracoesFormUn in 'ConfiguracoesFormUn.pas' {ConfiguracoesForm},
   unilabelConstantsUnit in 'unilabelConstantsUnit.pas';
 
