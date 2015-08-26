@@ -19,7 +19,7 @@ object Form1: TForm1
     Top = 71
     Width = 26
     Height = 13
-    Caption = '3.2.0'
+    Caption = '3.2.1'
   end
   object btnImprimir: TButton
     Left = 6

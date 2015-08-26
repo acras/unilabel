@@ -261,7 +261,7 @@ begin
         printingObject.printText(trim(line),x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
       inc(lineNum);
       if lineNum > maxLines then exit;
-      line := words[i];
+      line := words[i] + ' ';
     end
     else
       line := line + words[i] + ' ';
