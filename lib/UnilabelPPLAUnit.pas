@@ -26,7 +26,7 @@ public
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
       barcodeType: TUnilabelBarcodeFormats; height: double;
-      narrowWidth: integer; wideWidth: integer; showReadable: Boolean;
+      narrowWidth: double; wideWidth: double; showReadable: Boolean;
       spin: integer = 1);
     procedure printImage(path: string; x,y: double);
     procedure printBox(x,y,width,height,topThickness,sideThickness: double);
@@ -181,7 +181,7 @@ end;
 
 procedure TUnilabelPPLA.printBarcode(data: string; x, y: double;
   barcodeType: TUnilabelBarcodeFormats; height: double;
-  narrowWidth, wideWidth: integer;
+  narrowWidth, wideWidth: double;
   showReadable: Boolean; spin: integer = 1);
 var
   pType: char;
@@ -204,7 +204,7 @@ begin
   if showReadable then
     pType := UpCase(pType);
 
-  A_Prn_Barcode(pX, pY, spin, pType, narrowWidth, wideWidth,
+  A_Prn_Barcode(pX, pY, spin, pType, trunc(narrowWidth), trunc(wideWidth),
     trunc(height*10), 'N', 0, ansiString(data));
 end;
 
@@ -235,7 +235,7 @@ procedure TUnilabelPPLA.printText(data: string; x, y: double; fontName: string;
 var
   iBold, iItalic, iUnderline, iStrikeOut: integer;
 begin
-  if fsBold in fontStyles then iBold := 400 else iBold := 0;
+  if fsBold in fontStyles then iBold := 700 else iBold := 0;
   if fsItalic in fontStyles then iItalic := 1 else iItalic := 0;
   if fsUnderline in fontStyles then iUnderline := 1 else iUnderline := 0;
   if fsStrikeOut in fontStyles then iStrikeOut := 1 else iStrikeOut := 0;

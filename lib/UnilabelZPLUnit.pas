@@ -19,7 +19,7 @@ type
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x: double; y: double;
       barcodeType: TUnilabelBarcodeFormats; height: double;
-      narrowWidth: integer; wideWidth: integer; showReadable: Boolean;
+      narrowWidth: double; wideWidth: double; showReadable: Boolean;
       spin: integer = 1);
     procedure printImage(path: string; x,y: double);
     procedure printBox(x,y,width,height,topThickness,sideThickness: double);
@@ -87,7 +87,7 @@ end;
 
 procedure TUnilabelZPL.printBarcode(data: string; x, y: double;
   barcodeType: TUnilabelBarcodeFormats; height: double; narrowWidth,
-  wideWidth: integer; showReadable: Boolean; spin: integer);
+  wideWidth: double; showReadable: Boolean; spin: integer);
 var
   com: AnsiString;
   bcType, showReadableParam: AnsiString;
@@ -99,8 +99,8 @@ begin
     showReadableParam := 'N';
   com := 'B' + translatePositionParameter(x) + ',' +
     translateYParameter(y, height*8) + ',' +
-    IntToStr(translateOrientation(spin)) + ',' + bcType + ',' + IntToStr(narrowWidth) +
-    ',' + IntToStr(wideWidth) + ',' +
+    IntToStr(translateOrientation(spin)) + ',' + bcType + ',' + IntToStr(trunc(narrowWidth)) +
+    ',' + IntToStr(trunc(wideWidth)) + ',' +
     translatePositionParameter(height) + ',' + showReadableParam + ',' +
     '"' + data + '"';
   commands.Add(com);
@@ -144,8 +144,10 @@ begin
   for i := 0 to commands.Count-1 do
     cmm := cmm + commands[i] + #10;
   pword(cmm)^ := length(cmm)-2; // store the length
+  showMessage(String(cmm));
   if ExtEscape(Printer.Canvas.Handle, PASSTHROUGH, Length(cmm), pointer(cmm), 0, nil)<0 then
     raise Exception.Create('Error at printing to printer');
+  commands.SaveToFile('lastCommands.txt');
   Printer.EndDoc;
 end;
 

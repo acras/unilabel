@@ -17,9 +17,9 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 8
     Top = 71
-    Width = 26
+    Width = 16
     Height = 13
-    Caption = '3.2.1'
+    Caption = '4.0'
   end
   object btnImprimir: TButton
     Left = 6

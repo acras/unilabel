@@ -2,8 +2,8 @@ object ConfiguracoesForm: TConfiguracoesForm
   Left = 0
   Top = 0
   Caption = 'Configura'#231#245'es'
-  ClientHeight = 103
-  ClientWidth = 347
+  ClientHeight = 353
+  ClientWidth = 429
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -63,7 +63,8 @@ object ConfiguracoesForm: TConfiguracoesForm
     Items.Strings = (
       'Argox OS 214 (PPLA)'
       'Zebra TLP-2844'
-      'Argox PPLA (Via Driver)')
+      'Argox PPLA (Via Driver)'
+      'ZPL II')
   end
   object cboPrinters: TComboBox
     Left = 100
@@ -105,5 +106,39 @@ object ConfiguracoesForm: TConfiguracoesForm
     ParentFont = False
     TabOrder = 3
     OnClick = LinkLabel1Click
+  end
+  object Button1: TButton
+    Left = 83
+    Top = 208
+    Width = 177
+    Height = 25
+    Caption = 'Imprimir arquivo'
+    TabOrder = 4
+    OnClick = Button1Click
+  end
+  object Edit1: TEdit
+    Left = 83
+    Top = 181
+    Width = 177
+    Height = 21
+    TabOrder = 5
+    Text = 'd:\lastCommands.txt'
+  end
+  object Button2: TButton
+    Left = 83
+    Top = 239
+    Width = 177
+    Height = 25
+    Caption = 'Imprimir arquivo (modo comandos)'
+    TabOrder = 6
+    OnClick = Button2Click
+  end
+  object Edit2: TEdit
+    Left = 272
+    Top = 240
+    Width = 121
+    Height = 21
+    TabOrder = 7
+    Text = 'PORTA'
   end
 end

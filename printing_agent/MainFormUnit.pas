@@ -34,7 +34,7 @@ implementation
 
 uses UnilabelPPLAUnit, UnilabelInterfaceUnit, UnilabelXMLEngineUnit,
   UnilabelZPLUnit, ConfiguracoesFormUn, unilabelConstantsUnit,
-  UnilabelTypesUnit;
+  UnilabelTypesUnit, UnilabelZPL2Unit;
 
 procedure TForm1.printFile(fn: string);
 var
@@ -54,6 +54,10 @@ begin
   begin
     prnt := TUnilabelPPLA.create;
     prnt.setSpecificConfiguration('communication', 'driver');
+  end;
+  if modeloImpressora = ZPL_II then
+  begin
+    prnt := TUnilabelZPL2.create;
   end;
 
   printerConfiguration.name := ini.ReadString('printer','name','');

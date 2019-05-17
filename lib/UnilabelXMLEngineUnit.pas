@@ -32,7 +32,7 @@ private
     layoutNode, dataNode: IXMLDOMNode);
   function getXOffset: integer;
   function getYOffset: integer;
-  function parseBarcodeType(value: string): TUnilabelBarcodeFormats;
+  function parseBarcodeType(bcType, fieldValue: string): TUnilabelBarcodeFormats;
     procedure addParsedImageElement(p: IUnilabel; layoutNode,
       dataNode: IXMLDOMNode);
     function getWords(value: string): TStringList;
@@ -42,6 +42,8 @@ private
       var fontStyles: TFontStyles;
       var orientation, maxLines,
       maxCharsPerLine, lineHeight: integer; var value: string; var x, y: double);
+    function GetMod10CheckDigit(Number: String): Integer;
+    function isValidEAN13(number: string): boolean;
     property xOffset: integer read getXOffset;
     property yOffset: integer read getYOffset;
 end;
@@ -158,9 +160,11 @@ procedure TUnilabelXMLEngine.addParsedBarcodeElement(p: IUnilabel;
 var
   fieldName, value: string;
   x, y, height: Double;
-  narrow, wide: integer;
+  narrow, wide: double;
   barcodeType: TUnilabelBarcodeFormats;
+  fs: TFormatSettings;
 begin
+  fs.DecimalSeparator := '.';
   fieldName := layoutNode.attributes.getNamedItem('field').nodeValue;
   value := dataNode.attributes.getNamedItem(fieldName).nodeValue;
   height := 6;
@@ -168,13 +172,13 @@ begin
   wide := 6;
   barcodeType := bcfCode128;
   if layoutNode.attributes.getNamedItem('barcode-type') <> nil then
-    barcodeType := parseBarcodeType(layoutNode.attributes.getNamedItem('barcode-type').nodeValue);
+    barcodeType := parseBarcodeType(layoutNode.attributes.getNamedItem('barcode-type').nodeValue, value);
   if layoutNode.attributes.getNamedItem('height') <> nil then
     height := StrToFloat(layoutNode.attributes.getNamedItem('height').nodeValue, fsUSA);
   if layoutNode.attributes.getNamedItem('narrow') <> nil then
-    narrow := StrToInt(layoutNode.attributes.getNamedItem('narrow').nodeValue);
+    narrow := StrToFloat(layoutNode.attributes.getNamedItem('narrow').nodeValue, fsUSA);
   if layoutNode.attributes.getNamedItem('wide') <> nil then
-    wide := StrToInt(layoutNode.attributes.getNamedItem('wide').nodeValue);
+    wide := StrToFloat(layoutNode.attributes.getNamedItem('wide').nodeValue, fsUSA);
   x := StrToFloat(layoutNode.attributes.getNamedItem('x').nodeValue, fsUSA) + xOffset;
   y := StrToFloat(layoutNode.attributes.getNamedItem('y').nodeValue, fsUSA) + yOffset;
   if barcodeType = bcfCode3of9 then
@@ -182,15 +186,18 @@ begin
   printingObject.printBarcode(value,x,y,barcodeType,height,narrow,wide,false);
 end;
 
-function TUnilabelXMLEngine.parseBarcodeType(value: string): TUnilabelBarcodeFormats;
+function TUnilabelXMLEngine.parseBarcodeType(bcType, fieldValue: string): TUnilabelBarcodeFormats;
 begin
   result := bcfCode128;
-  if UpperCase(value) = 'CODE128' then
+  if UpperCase(bcType) = 'CODE128' then
     result := bcfCode128; //redundant for the sake of readability
-  if UpperCase(value) = 'CODE3OF9' then
+  if UpperCase(bcType) = 'CODE3OF9' then
     result := bcfCode3of9;
-  if UpperCase(value) = 'EAN13' then
-    result := bcfEAN13;
+  if UpperCase(bcType) = 'EAN13' then
+  begin
+    if isValidEAN13(fieldValue) then //only allow EAN13 bcType if has valid EAN13 value
+      result := bcfEAN13;
+  end;
 end;
 
 procedure TUnilabelXMLEngine.parseTextElementParams(layoutNode, dataNode: IXMLDOMNode;
@@ -382,6 +389,58 @@ begin
   except
     result := defaultValue;
   end;
+end;
+
+function TUnilabelXMLEngine.isValidEAN13(number: string): boolean;
+var
+  bc, digitStr: string;
+  digitInt: integer;
+begin
+  result := false;
+  if length(number) <> 13 then exit;
+  bc := copy(number, 1, 12);
+  digitStr := copy(number, 13, 1);
+  try
+    digitInt := strToInt(digitStr);
+  except
+    exit;
+  end;
+  result := GetMod10CheckDigit(bc) = digitInt;
+end;
+
+function TUnilabelXMLEngine.GetMod10CheckDigit(Number: String): Integer;
+var
+  SLen,CurrentPos,Total1,Total2,Total3,Count: Integer;
+  TempStr: String;
+begin
+  Slen:=Length(Number);
+  CurrentPos:=SLen;
+  Total1:=0;Total2:=0;
+  while (1=1) do
+  begin
+    Total1:=Total1+strtointdef(Number[CurrentPos],0);
+    CurrentPos:=CurrentPos-2;
+    if CurrentPos<1 then break;
+  end;
+  CurrentPos:=SLen-1;
+  while (1=1) do
+  begin
+    Total2:=Total2+strtointdef(Number[CurrentPos],0);
+    CurrentPos:=CurrentPos-2;
+    if CurrentPos<1 then break;
+  end;
+  Total3:=(3*Total1)+Total2-1;
+  for Count:=0 to 9 do
+  begin
+    inc(Total3);
+    TempStr:=inttostr(Total3);
+    if copy(TempStr,Length(TempStr),1)='0' then
+    begin
+      Result := Count;
+      exit;
+    end
+  end;
+  Result:=0;
 end;
 
 

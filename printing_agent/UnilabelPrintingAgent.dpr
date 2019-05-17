@@ -9,11 +9,13 @@ uses
   UnilabelXMLEngineUnit in '..\lib\UnilabelXMLEngineUnit.pas',
   UnilabelZPLUnit in '..\lib\UnilabelZPLUnit.pas',
   UnilabelTypesUnit in '..\lib\UnilabelTypesUnit.pas',
-  DLog in '..\..\repositorio\DLog.pas' {DataLog: TDataModule},
-  acStrUtils in '..\..\repositorio\acStrUtils.pas',
-  acSysUtils in '..\..\repositorio\acSysUtils.pas',
+  DLog in 'E:\repositorio\DLog.pas' {DataLog: TDataModule},
+  acStrUtils in 'E:\repositorio\acStrUtils.pas',
+  acSysUtils in 'E:\repositorio\acSysUtils.pas',
   ConfiguracoesFormUn in 'ConfiguracoesFormUn.pas' {ConfiguracoesForm},
-  unilabelConstantsUnit in 'unilabelConstantsUnit.pas';
+  unilabelConstantsUnit in 'unilabelConstantsUnit.pas',
+  ISincronizacaoNotifierUnit in 'E:\hibrido_client\lib\ISincronizacaoNotifierUnit.pas',
+  UnilabelZPL2Unit in '..\lib\UnilabelZPL2Unit.pas';
 
 {$R *.res}
 

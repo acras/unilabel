@@ -19,7 +19,7 @@ type
       fontStyles: TFontStyles; fontSize: double; spin: integer = 1);
     procedure printBarcode(data: string; x,y: double;
       barcodeType: TUnilabelBarcodeFormats;
-      height: double; narrowWidth, wideWidth: integer;
+      height: double; narrowWidth, wideWidth: double;
       showReadable: boolean; spin: integer = 1);
     procedure printImage(path: string; x,y: double);
     procedure printBox(x,y,width,height,topThickness,sideThickness: double);
