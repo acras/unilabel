@@ -28,6 +28,7 @@ type
     procedure closePrinter;
     procedure startJob;
     procedure finishJob;
+    function lineIncreaseFactor: integer;
   protected
     fsUSA: TFormatSettings;
     commands: TStringList;
@@ -86,6 +87,11 @@ end;
 
 function TUnilabelZPL2.initializePrinter: boolean;
 begin
+end;
+
+function TUnilabelZPL2.lineIncreaseFactor: integer;
+begin
+  result := -1;
 end;
 
 procedure TUnilabelZPL2.printBarcode(data: string; x, y: double;
@@ -167,22 +173,52 @@ end;
 
 procedure TUnilabelZPL2.finishJob;
 var
-  cmm, printerName: AnsiString;
-  i: integer;
+  printerName: AnsiString;
+  m: integer;
   deviceMode: NativeUint;
+  docInfo: TDocInfo1W;
+  memStream: TMemoryStream;
+  buff : array [1..128] of char;
+  N: DWord;
+  handle: THandle;
+  MyPrinter, MyDriver, MyPort: array[0..100] of Char;
 begin
+  //Preparar um doc para impressao
+  docInfo.pDocName    := 'Etiquetas Unilabel';
+  docInfo.pOutputFile := nil;
+  docinfo.pDatatype   := 'RAW';
+  //Obter e abrir a comunicaçao com a impressora
   printerName := printerConfiguration.name;
   if printerName <> '' then
     Printer.PrinterIndex := Printer.Printers.IndexOf(printerName);
-  Printer.BeginDoc;
-  cmm := '00'; // reserve space for the initial `word`
-  for i := 0 to commands.Count-1 do
-    cmm := cmm + commands[i] + #10;
-  pword(cmm)^ := length(cmm)-2; // store the length
-  if ExtEscape(Printer.Canvas.Handle, PASSTHROUGH, Length(cmm), pointer(cmm), 0, nil)<0 then
-    raise Exception.Create('Error at printing to printer');
-  commands.SaveToFile('lastCommands.txt');
-  Printer.EndDoc;
+  Printer.GetPrinter(MyPrinter, MyDriver, MyPort, handle);
+  if not OpenPrinter(myPrinter, handle, nil) then
+    MessageDlg('Erro ao abrir a impressora. ' + intToStr(getLastError), mtError, [mbOK], 0);
+  //Iniciar o documento
+  if StartDocPrinter(handle,1,@docInfo) = 0 then
+    MessageDlg('Erro ao iniciar doc na impressora. Código: ' + intToStr(getLastError), mtError, [mbOK], 0);
+  if not StartPagePrinter(handle) then
+    MessageDlg('Erro ao iniciar página. Código: ' + intToStr(getLastError), mtError, [mbOK], 0);
+
+  memStream := TMemoryStream.Create;
+  try
+    commands.SaveToStream(memStream);
+    memStream.Position := 0;
+    repeat
+      m := memStream.Read(buff,sizeof(buff));
+      if m = 0 then break;
+      if not WritePrinter(handle,@buff[1],m,N) then
+      begin
+        showMessage('erro: ' + IntToStr(GetLastError));
+      end;
+    until m <> N;
+    if not endPagePrinter(handle) then
+      MessageDlg('Erro ao finalizar página. Código: ' + intToStr(getLastError), mtError, [mbOK], 0);
+    if not endDocPrinter(handle) then
+      MessageDlg('Erro ao finalizar doc na impressora. ' + intToStr(getLastError), mtError, [mbOK], 0);
+  finally
+    memStream.Free;
+  end;
 end;
 
 function TUnilabelZPL2.getFieldOriginParam(x, y: integer): string;

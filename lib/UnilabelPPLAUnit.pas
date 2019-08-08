@@ -35,6 +35,7 @@ public
     procedure closePrinter;
     procedure startJob;
     procedure finishJob;
+    function lineIncreaseFactor: integer;
   protected
     labelConfiguration: TLabelConfiguration;
     tempFileName: String;
@@ -171,6 +172,11 @@ begin
   end;
 
   result := ret <= 0;
+end;
+
+function TUnilabelPPLA.lineIncreaseFactor: integer;
+begin
+  result := 1;
 end;
 
 function TUnilabelPPLA.nextInternalVarName: string;

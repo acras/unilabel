@@ -2,7 +2,7 @@ object ConfiguracoesForm: TConfiguracoesForm
   Left = 0
   Top = 0
   Caption = 'Configura'#231#245'es'
-  ClientHeight = 353
+  ClientHeight = 104
   ClientWidth = 429
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -114,6 +114,7 @@ object ConfiguracoesForm: TConfiguracoesForm
     Height = 25
     Caption = 'Imprimir arquivo'
     TabOrder = 4
+    Visible = False
     OnClick = Button1Click
   end
   object Edit1: TEdit
@@ -123,6 +124,7 @@ object ConfiguracoesForm: TConfiguracoesForm
     Height = 21
     TabOrder = 5
     Text = 'd:\lastCommands.txt'
+    Visible = False
   end
   object Button2: TButton
     Left = 83
@@ -131,6 +133,7 @@ object ConfiguracoesForm: TConfiguracoesForm
     Height = 25
     Caption = 'Imprimir arquivo (modo comandos)'
     TabOrder = 6
+    Visible = False
     OnClick = Button2Click
   end
   object Edit2: TEdit
@@ -140,5 +143,6 @@ object ConfiguracoesForm: TConfiguracoesForm
     Height = 21
     TabOrder = 7
     Text = 'PORTA'
+    Visible = False
   end
 end

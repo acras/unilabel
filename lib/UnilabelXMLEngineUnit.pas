@@ -250,22 +250,24 @@ var
   fieldName, fontName, value, line: string;
   x,y,fontSize: double;
   maxLines, maxCharsPerLine, orientation: integer;
-  i, lineNum, lineHeight: integer;
+  i, lineNum, lineRelative, lineHeight: integer;
   words: TStringList;
 begin
   parseTextElementParams(layoutNode, dataNode, fontName, fontSize, fs, orientation,
     maxLines, maxCharsPerLine, lineHeight, value, x, y);
   words := getWords(value);
   lineNum := 1;
+  lineRelative := 1;
   line := '';
   for i := 0 to words.count -1 do
   begin
     if (length(words[i]) + 1 + length(line)) > maxCharsPerLine then
     begin
       if orientation = 3 then
-        printingObject.printText(trim(line),x,y+(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation)
+        printingObject.printText(trim(line),x,y+(lineHeight*(lineRelative-1)),fontName,fs,fontSize,orientation)
       else
-        printingObject.printText(trim(line),x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+        printingObject.printText(trim(line),x,y-(lineHeight*(lineRelative-1)),fontName,fs,fontSize,orientation);
+      inc(lineRelative, p.lineIncreaseFactor);
       inc(lineNum);
       if lineNum > maxLines then exit;
       line := words[i] + ' ';
@@ -276,9 +278,9 @@ begin
   if line <> '' then
   begin
     if orientation = 3 then
-      printingObject.printText(trim(line),x,y+(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation)
+      printingObject.printText(trim(line),x,y+(lineHeight*(lineRelative-1)),fontName,fs,fontSize,orientation)
     else
-      printingObject.printText(trim(line),x,y-(lineHeight*(lineNum-1)),fontName,fs,fontSize,orientation);
+      printingObject.printText(trim(line),x,y-(lineHeight*(lineRelative-1)),fontName,fs,fontSize,orientation);
   end;
 end;
 

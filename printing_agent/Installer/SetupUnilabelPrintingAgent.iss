@@ -8,7 +8,7 @@ Source: ..\..\lib_files\PPLA\32bits\Winppla.lib; DestDir: {userappdata}\Unilabel
 Filename: {userappdata}\UnilabelPrintingAgent\UnilabelPrintingAgent.exe; Flags: nowait
 [Setup]
 AppName=Unilabel Printing Agent
-AppVerName=Unilabel Printing Agent 2.0
+AppVerName=Unilabel Printing Agent 4.1
 DefaultDirName={userappdata}\UnilabelPrintingAgent
 LanguageDetectionMethod=locale
 PrivilegesRequired=none

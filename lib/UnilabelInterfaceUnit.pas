@@ -24,6 +24,7 @@ type
     procedure printImage(path: string; x,y: double);
     procedure printBox(x,y,width,height,topThickness,sideThickness: double);
 
+    function lineIncreaseFactor: integer;
 
     //Flow Control
     function initializePrinter: boolean;

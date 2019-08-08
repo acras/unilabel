@@ -28,6 +28,7 @@ type
     procedure closePrinter;
     procedure startJob;
     procedure finishJob;
+    function lineIncreaseFactor: integer;
   protected
     commands: TStringList;
     widthParam: string;
@@ -83,6 +84,11 @@ end;
 
 function TUnilabelZPL.initializePrinter: boolean;
 begin
+end;
+
+function TUnilabelZPL.lineIncreaseFactor: integer;
+begin
+  result := 1;
 end;
 
 procedure TUnilabelZPL.printBarcode(data: string; x, y: double;
